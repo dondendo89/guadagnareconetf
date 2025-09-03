@@ -32,7 +32,8 @@ async function generateAIArticles() {
             
             // Successo
             statusDiv.className = 'ai-status success';
-            statusText.textContent = `✅ Generati ${result.count} articoli con successo!`;
+            const count = result.articles_generated || result.count || 0;
+            statusText.textContent = `✅ Generati ${count} articoli con successo!`;
             
             // Aggiorna la lista degli articoli
             if (typeof loadBlogArticles === 'function') {
