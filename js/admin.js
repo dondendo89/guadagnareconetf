@@ -353,8 +353,8 @@ class AdminPanel {
 
     loadBlogManager() {
         const container = document.getElementById('blogManager');
-        // Load articles from blog-data.js instead of localStorage
-        const articles = typeof blogArticles !== 'undefined' ? blogArticles : this.adminData.articles;
+        // Always use adminData.articles for admin management
+        const articles = this.adminData.articles;
         
         let html = `
             <div class="articles-list">
@@ -750,6 +750,8 @@ class AdminPanel {
         if (confirm('Sei sicuro di voler eliminare questo articolo?')) {
             this.adminData.articles.splice(index, 1);
             this.saveData();
+            // Update blog-data.js to sync with main site
+            this.updateBlogDataFile();
             this.loadBlogManager();
         }
     }
@@ -1133,6 +1135,35 @@ class AdminPanel {
         // Broadcast to all windows
         localStorage.setItem('adminData', JSON.stringify(this.adminData));
         localStorage.setItem('adminUpdate', Date.now().toString());
+    }
+
+    async updateBlogDataFile() {
+        try {
+            const response = await fetch('/api/blog-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    action: 'update_articles',
+                    articles: this.adminData.articles
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log('Blog data updated successfully:', result);
+            
+            // Force refresh of main site
+            this.forceMainSiteRefresh();
+            
+        } catch (error) {
+            console.error('Error updating blog-data.js:', error);
+            alert('Errore durante l\'aggiornamento del file blog-data.js. L\'articolo è stato eliminato dall\'admin ma potrebbe non essere aggiornato sul sito principale.');
+        }
     }
 }
 
