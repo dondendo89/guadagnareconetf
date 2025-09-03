@@ -1,0 +1,11 @@
+2025-09-03 16:06:37,956 - INFO - 🧪 Test generazione articolo
+2025-09-03 16:06:37,957 - INFO - Inizio generazione di 1 articoli
+2025-09-03 16:06:37,957 - INFO - Caricamento modello: microsoft/DialoGPT-medium
+2025-09-03 16:06:39,697 - INFO - Modello caricato con successo
+2025-09-03 16:06:39,697 - INFO - Generazione articolo: Confronto ETF sostenibili ESG: I Migliori ETF del 2025
+2025-09-03 16:07:16,068 - ERROR - Errore nella generazione dell'articolo: Numpy is not available
+2025-09-03 16:07:16,068 - INFO - Articolo di fallback creato: Confronto ETF sostenibili ESG: I Migliori ETF del 2025
+2025-09-03 16:07:16,233 - INFO - Articolo salvato: generated_articles/article_confronto-etf-sostenibili-esg-i-migliori-etf-del-2025-1756908436.json
+2025-09-03 16:07:16,233 - INFO - Articolo 1/1 completato
+2025-09-03 16:07:18,236 - INFO - Generazione completata: 1 articoli creati
+2025-09-03 16:07:18,236 - INFO - ✅ Test completato: Confronto ETF sostenibili ESG: I Migliori ETF del 2025

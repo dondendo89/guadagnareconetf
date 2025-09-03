@@ -145,10 +145,20 @@ class AdminIntegration {
     }
 
     getPublishedArticles() {
-        if (!this.adminData || !this.adminData.articles) {
-            return [];
+        // First try to get articles from adminData (localStorage)
+        if (this.adminData && this.adminData.articles) {
+            const adminArticles = this.adminData.articles.filter(article => article.published);
+            if (adminArticles.length > 0) {
+                return adminArticles;
+            }
         }
-        return this.adminData.articles.filter(article => article.published);
+        
+        // Fallback to blog-data.js articles if available
+        if (window.blogArticles) {
+            return window.blogArticles.filter(article => article.published);
+        }
+        
+        return [];
     }
 
     renderBrokers(containerId) {
