@@ -1,11 +1,7 @@
 from http.server import BaseHTTPRequestHandler
 import json
-import sys
 import os
 from datetime import datetime
-
-# Add the parent directory to the path to import our modules
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):

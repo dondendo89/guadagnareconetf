@@ -1,25 +1,44 @@
-# File di log
+# Log files
 *.log
 api_server.log
 ai_generator.log
+scheduler.log
 
-# Directory temporanee
-generated_articles/
-processed_articles/
+# Temporary directories
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# File di sviluppo
-api_server.py
-scheduler.py
+# Development files
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+api_server.py
+scheduler.py
+ai_blog_integration.py
+
+# Generated content (not needed for build)
+generated_articles/
+processed_articles/
 
 # IDE files
 .vscode/
@@ -30,16 +49,25 @@ scheduler.py
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
 # Backup files
 *.bak
 *.backup
+*.old
 
 # Test files
-test_*
-*_test.py
+test/
+tests/
+*.test.js
+*.spec.js
 
 # Documentation
-AI_SETUP_README.md
-README.md
+*.md
+!README.md
+!VERCEL_DEPLOYMENT.md
