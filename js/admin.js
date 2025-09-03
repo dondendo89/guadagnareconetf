@@ -353,7 +353,8 @@ class AdminPanel {
 
     loadBlogManager() {
         const container = document.getElementById('blogManager');
-        const articles = this.adminData.articles;
+        // Load articles from blog-data.js instead of localStorage
+        const articles = typeof blogArticles !== 'undefined' ? blogArticles : this.adminData.articles;
         
         let html = `
             <div class="articles-list">
@@ -361,16 +362,21 @@ class AdminPanel {
         `;
         
         articles.forEach((article, index) => {
+            // Handle both blog-data.js format and localStorage format
+            const articleDate = article.date ? new Date(article.date).toLocaleDateString('it-IT') : 'N/A';
+            const isAIGenerated = article.aiGenerated || false;
+            
             html += `
                 <div class="article-card">
                     <div class="article-info">
-                        <h4>${article.title}</h4>
+                        <h4>${article.title} ${isAIGenerated ? '<span class="ai-badge">AI</span>' : ''}</h4>
                         <p>${article.excerpt}</p>
                         <div class="article-meta">
-                            <span class="date">Data: ${article.date}</span>
+                            <span class="date">Data: ${articleDate}</span>
                             <span class="status ${article.published ? 'published' : 'draft'}">
                                 ${article.published ? 'Pubblicato' : 'Bozza'}
                             </span>
+                            ${article.category ? `<span class="category">${article.category}</span>` : ''}
                         </div>
                     </div>
                     <div class="article-actions">
@@ -439,6 +445,21 @@ class AdminPanel {
                     display: flex;
                     gap: 0.5rem;
                     flex-shrink: 0;
+                }
+                .ai-badge {
+                    background: #3498db;
+                    color: white;
+                    padding: 0.2rem 0.4rem;
+                    border-radius: 3px;
+                    font-size: 0.7rem;
+                    margin-left: 0.5rem;
+                }
+                .category {
+                    background: #9b59b6;
+                    color: white;
+                    padding: 0.2rem 0.4rem;
+                    border-radius: 3px;
+                    font-size: 0.7rem;
                 }
             </style>
         `;

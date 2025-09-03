@@ -41,3 +41,17 @@
 2025-09-03 11:55:38,027 - INFO - Articolo salvato: generated_articles/article_trend-etf-commodities-previsioni-per-il-2025-1756893338.json
 2025-09-03 11:55:38,027 - INFO - Articolo 2/2 completato
 2025-09-03 11:55:40,031 - INFO - Generazione completata: 2 articoli creati
+2025-09-03 12:31:13,417 - INFO - Caricamento modello: microsoft/DialoGPT-medium
+2025-09-03 12:31:14,849 - INFO - Modello caricato con successo
+2025-09-03 12:31:14,849 - INFO - Inizio generazione di 2 articoli
+2025-09-03 12:31:14,850 - INFO - Generazione articolo: Analisi ETF commodities: Opportunità e Rischi nel 2025
+2025-09-03 12:31:21,453 - ERROR - Errore nella generazione dell'articolo: Numpy is not available
+2025-09-03 12:31:21,453 - INFO - Articolo di fallback creato: Analisi ETF commodities: Opportunità e Rischi nel 2025
+2025-09-03 12:31:21,455 - INFO - Articolo salvato: generated_articles/article_analisi-etf-commodities-opportunità-e-rischi-nel-2025-1756895481.json
+2025-09-03 12:31:21,455 - INFO - Articolo 1/2 completato
+2025-09-03 12:31:23,458 - INFO - Generazione articolo: Strategie di Investimento con ETF dividend yield nel 2025
+2025-09-03 12:31:43,113 - ERROR - Errore nella generazione dell'articolo: Numpy is not available
+2025-09-03 12:31:43,113 - INFO - Articolo di fallback creato: Strategie di Investimento con ETF dividend yield nel 2025
+2025-09-03 12:31:43,114 - INFO - Articolo salvato: generated_articles/article_strategie-di-investimento-con-etf-dividend-yield-nel-2025-1756895503.json
+2025-09-03 12:31:43,114 - INFO - Articolo 2/2 completato
+2025-09-03 12:31:45,118 - INFO - Generazione completata: 2 articoli creati

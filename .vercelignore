@@ -1,0 +1,45 @@
+# File di log
+*.log
+api_server.log
+ai_generator.log
+
+# Directory temporanee
+generated_articles/
+processed_articles/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# File di sviluppo
+api_server.py
+scheduler.py
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+
+# Test files
+test_*
+*_test.py
+
+# Documentation
+AI_SETUP_README.md
+README.md

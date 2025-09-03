@@ -15,14 +15,14 @@ async function generateAIArticles() {
     statusText.textContent = 'Avvio generazione articoli AI...';
     
     try {
-        // Chiamata al server API locale
-        const response = await fetch('http://localhost:8001/api/generate-articles', {
+        // Chiamata alle API serverless di Vercel
+        const response = await fetch('/api/generate-articles', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                count: 2,
+                num_articles: 2,
                 type: 'manual'
             })
         });
@@ -170,7 +170,7 @@ function updateAIStats() {
  */
 async function loadArticlesFromAPI() {
     try {
-        const response = await fetch('http://localhost:8001/api/articles');
+        const response = await fetch('/api/blog-data');
         if (response.ok) {
             const data = await response.json();
             
