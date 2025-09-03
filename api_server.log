@@ -205,3 +205,31 @@
 2025-09-03 12:46:18,351 - ERROR - ⏰ Timeout nella generazione degli articoli
 2025-09-03 12:46:29,531 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
 2025-09-03 12:46:29,533 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:47:29,534 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:47:29,540 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:47:43,494 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:47:43,496 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:48:13,478 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:48:13,480 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:48:43,479 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:48:43,480 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:49:13,477 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:49:13,479 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:49:43,477 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:49:43,478 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:50:13,474 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:50:13,477 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:50:24,047 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:50:24,050 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:50:26,852 - INFO - 127.0.0.1 - "OPTIONS /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 12:50:26,855 - INFO - Richiesta generazione: 2 articoli, tipo: manual
+2025-09-03 12:50:26,860 - INFO - Avvio generazione manual di 2 articoli...
+2025-09-03 12:50:26,866 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 12:50:34,516 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:50:34,521 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:51:04,656 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:51:04,660 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:51:34,509 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:51:34,511 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:52:04,489 - INFO - 127.0.0.1 - "OPTIONS /api/articles HTTP/1.1" 200 -
+2025-09-03 12:52:04,499 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -

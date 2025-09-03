@@ -7,3 +7,4 @@
 
 # Admin credentials and sensitive configuration
 config/credentials.json
+api_server.log
