@@ -1,34 +1,17 @@
 {
   "version": 2,
-  "functions": {
-    "api/*.py": {
-      "runtime": "python3.9"
-    }
-  },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/generate-articles",
-      "dest": "/api/generate-articles.py"
+      "source": "/api/generate-articles",
+      "destination": "/api/generate-articles.py"
     },
     {
-      "src": "/api/blog-data",
-      "dest": "/api/blog-data.py"
+      "source": "/api/blog-data",
+      "destination": "/api/blog-data.py"
     },
     {
-      "src": "/api/storage",
-      "dest": "/api/storage.py"
-    },
-    {
-      "src": "/(.*\\.(js|css|html|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
-      "dest": "/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/api/storage",
+      "destination": "/api/storage.py"
     }
   ],
   "env": {
