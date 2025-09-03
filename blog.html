@@ -34,26 +34,38 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="/">📈 ETF Italia</a>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="/" class="logo">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect width="32" height="32" rx="8" fill="#2563eb"/>
+                            <path d="M8 12h16v2H8v-2zm0 4h16v2H8v-2zm0 4h12v2H8v-2z" fill="white"/>
+                        </svg>
+                        <span>ETF Italia</span>
+                    </a>
                 </div>
-                <nav class="nav">
+                
+                <div class="nav-menu" id="navMenu">
                     <ul class="nav-list">
-                        <li><a href="/#hero" class="nav-link">Home</a></li>
-                        <li><a href="/#etf-search" class="nav-link">Cerca ETF</a></li>
-                        <li><a href="/#comparator" class="nav-link">Comparatore</a></li>
+                        <li><a href="/" class="nav-link">Home</a></li>
+                        <li><a href="/#ricerca" class="nav-link">Ricerca ETF</a></li>
+                        <li><a href="/#comparatore" class="nav-link">Comparatore</a></li>
+                        <li><a href="/#simulatore" class="nav-link">Simulatore</a></li>
+                        <li><a href="/#portafoglio" class="nav-link">Portafoglio</a></li>
+                        <li><a href="/#fire" class="nav-link">Tool FIRE</a></li>
                         <li><a href="/#brokers" class="nav-link">Broker</a></li>
-                        <li><a href="/#blog" class="nav-link active">Blog</a></li>
-                        <li><a href="/#fire-calculator" class="nav-link">Calcolatore FIRE</a></li>
+                        <li><a href="/blog.html" class="nav-link active">Blog</a></li>
                     </ul>
-                </nav>
-                <div class="header-actions">
-                    <button class="btn btn-primary" onclick="window.location.href='admin.html'">Admin</button>
+                </div>
+                
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
-        </div>
+        </nav>
     </header>
 
     <!-- Main Content -->
