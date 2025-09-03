@@ -28,12 +28,16 @@ class handler(BaseHTTPRequestHandler):
             # Generate articles using lightweight approach
             generated_articles = self.generate_lightweight_articles(num_articles)
             
+            # Save articles to blog-data.js
+            save_success = self.save_articles_to_blog(generated_articles)
+            
             # Return success response
             response = {
                 'success': True,
                 'message': f'Generati {len(generated_articles)} articoli con successo',
                 'articles_generated': len(generated_articles),
-                'articles': generated_articles
+                'articles': generated_articles,
+                'saved_to_blog': save_success
             }
             
             self.wfile.write(json.dumps(response).encode('utf-8'))
@@ -113,6 +117,38 @@ class handler(BaseHTTPRequestHandler):
         """
         
         return content.strip()
+    
+    def save_articles_to_blog(self, articles):
+        """Save generated articles to blog-data.js via API call"""
+        try:
+            # Get the host from the current request
+            host = self.headers.get('Host', 'guadagnareconetf.vercel.app')
+            
+            # Prepare API call to blog-data
+            blog_api_url = f'https://{host}/api/blog-data'
+            
+            for article in articles:
+                payload = {
+                    'action': 'add_article',
+                    'article': article
+                }
+                
+                response = requests.post(
+                    blog_api_url,
+                    json=payload,
+                    headers={'Content-Type': 'application/json'},
+                    timeout=10
+                )
+                
+                if response.status_code != 200:
+                    print(f"Failed to save article {article['id']}: {response.text}")
+                    return False
+            
+            return True
+            
+        except Exception as e:
+            print(f"Error saving articles to blog: {str(e)}")
+            return False
     
     def do_OPTIONS(self):
         # Handle preflight requests
