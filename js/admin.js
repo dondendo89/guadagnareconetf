@@ -5,12 +5,14 @@ class AdminPanel {
         this.currentSection = 'dashboard';
         this.adminData = {
             sections: {
-                'etf-search': { name: 'Ricerca ETF', visible: true, order: 1 },
-                'etf-details': { name: 'Dettagli ETF', visible: true, order: 2 },
-                'comparator': { name: 'Comparatore', visible: true, order: 3 },
-                'simulator': { name: 'Simulatore', visible: true, order: 4 },
-                'portfolio': { name: 'Portfolio', visible: true, order: 5 },
-                'fire-calculator': { name: 'Calcolatore FIRE', visible: true, order: 6 }
+                'home': { name: 'Home/Hero', visible: true, order: 1 },
+                'ricerca': { name: 'Ricerca ETF', visible: true, order: 2 },
+                'comparatore': { name: 'Comparatore', visible: true, order: 3 },
+                'simulatore': { name: 'Simulatore', visible: true, order: 4 },
+                'portafoglio': { name: 'Portfolio', visible: true, order: 5 },
+                'fire': { name: 'Calcolatore FIRE', visible: true, order: 6 },
+                'brokers': { name: 'Brokers', visible: true, order: 7 },
+                'blog': { name: 'Blog', visible: true, order: 8 }
             },
             brokers: [],
             articles: [],
@@ -525,9 +527,22 @@ class AdminPanel {
 
     // Section Management
     toggleSection(sectionKey) {
+        console.log(`Admin: Toggling section ${sectionKey} from ${this.adminData.sections[sectionKey].visible} to ${!this.adminData.sections[sectionKey].visible}`);
         this.adminData.sections[sectionKey].visible = !this.adminData.sections[sectionKey].visible;
+        console.log('Admin: Updated sections data:', this.adminData.sections);
+        
+        // Force immediate save and update
         this.saveData();
-        this.updateMainSiteVisibility();
+        console.log('Admin: Data saved to localStorage');
+        
+        // Wait a bit then force update
+        setTimeout(() => {
+            this.updateMainSiteVisibility();
+            this.forceMainSiteRefresh();
+        }, 100);
+        
+        this.loadSectionsManager();
+        this.loadDashboard();
     }
 
     moveSection(sectionKey, direction) {
@@ -888,15 +903,26 @@ class AdminPanel {
 
     // Data Management
     saveData() {
-        localStorage.setItem('adminData', JSON.stringify(this.adminData));
-        
-        // Auto backup every 30 minutes
-        const lastAutoBackup = localStorage.getItem('lastAutoBackup');
-        const now = Date.now();
-        
-        if (!lastAutoBackup || (now - parseInt(lastAutoBackup)) > 30 * 60 * 1000) {
-            this.saveAutoBackup();
-            localStorage.setItem('lastAutoBackup', now.toString());
+        try {
+            const dataToSave = JSON.stringify(this.adminData);
+            console.log('Admin: Saving data to localStorage:', dataToSave);
+            localStorage.setItem('adminData', dataToSave);
+            console.log('Admin: Data saved successfully to localStorage');
+            
+            // Verify the save
+            const savedData = localStorage.getItem('adminData');
+            console.log('Admin: Verification - data in localStorage:', savedData);
+            
+            // Auto backup every 30 minutes
+            const lastAutoBackup = localStorage.getItem('lastAutoBackup');
+            const now = Date.now();
+            
+            if (!lastAutoBackup || (now - parseInt(lastAutoBackup)) > 30 * 60 * 1000) {
+                this.saveAutoBackup();
+                localStorage.setItem('lastAutoBackup', now.toString());
+            }
+        } catch (error) {
+            console.error('Error saving admin data:', error);
         }
     }
 
@@ -905,6 +931,9 @@ class AdminPanel {
         if (savedData) {
             const parsed = JSON.parse(savedData);
             this.adminData = { ...this.adminData, ...parsed };
+        } else {
+            // First time setup - save default data
+            this.saveData();
         }
         
         // Initialize credentials if not set
@@ -999,9 +1028,44 @@ class AdminPanel {
     }
 
     updateMainSiteVisibility() {
-        // This would communicate with the main site to update section visibility
-        // For now, we'll just save the data
-        console.log('Updating main site visibility:', this.adminData.sections);
+        console.log('Admin: Updating main site visibility...');
+        
+        // Trigger storage event to notify main site of changes
+        window.dispatchEvent(new StorageEvent('storage', {
+            key: 'adminData',
+            newValue: JSON.stringify(this.adminData),
+            storageArea: localStorage
+        }));
+        
+        // Also try to directly update if adminIntegration is available
+        if (window.parent && window.parent.adminIntegration) {
+            console.log('Admin: Calling parent adminIntegration.refresh()');
+            window.parent.adminIntegration.refresh();
+        }
+        
+        console.log('Updated main site visibility:', this.adminData.sections);
+    }
+    
+    forceMainSiteRefresh() {
+        console.log('Admin: Force refreshing main site...');
+        
+        // Try multiple methods to ensure the main site updates
+        if (window.opener && window.opener.adminIntegration) {
+            console.log('Admin: Calling opener adminIntegration.forceRefresh()');
+            window.opener.adminIntegration.forceRefresh();
+        }
+        
+        // Also try postMessage for cross-frame communication
+        if (window.parent !== window) {
+            window.parent.postMessage({
+                type: 'adminUpdate',
+                data: this.adminData
+            }, '*');
+        }
+        
+        // Broadcast to all windows
+        localStorage.setItem('adminData', JSON.stringify(this.adminData));
+        localStorage.setItem('adminUpdate', Date.now().toString());
     }
 }
 

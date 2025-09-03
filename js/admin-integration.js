@@ -2,49 +2,96 @@
 class AdminIntegration {
     constructor() {
         this.adminData = null;
+        this.lastDataHash = null;
+        console.log('AdminIntegration: Initializing...');
         this.loadAdminData();
+        console.log('AdminIntegration: Data loaded:', this.adminData);
         this.applySectionVisibility();
         this.initializeContent();
+        
+        // Check for changes every 1 second for faster response
+        setInterval(() => {
+            this.checkForUpdates();
+        }, 1000);
+        
+        // Force initial check after DOM is fully loaded
+        setTimeout(() => {
+            this.forceRefresh();
+        }, 500);
+        
+        // Listen for postMessage from admin panel
+        window.addEventListener('message', (event) => {
+            if (event.data && event.data.type === 'adminUpdate') {
+                console.log('AdminIntegration: Received admin update via postMessage');
+                this.adminData = event.data.data;
+                this.applySectionVisibility();
+            }
+        });
+        
+        // Listen for localStorage changes from other tabs/windows
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'adminUpdate') {
+                console.log('AdminIntegration: Detected adminUpdate trigger');
+                this.forceRefresh();
+            }
+        });
     }
 
     loadAdminData() {
         const savedData = localStorage.getItem('adminData');
+        console.log('AdminIntegration: Loading admin data from localStorage:', savedData);
+        
         if (savedData) {
-            this.adminData = JSON.parse(savedData);
+            try {
+                this.adminData = JSON.parse(savedData);
+                console.log('AdminIntegration: Parsed admin data:', this.adminData);
+            } catch (error) {
+                console.error('AdminIntegration: Error parsing admin data:', error);
+                this.adminData = null;
+            }
+        } else {
+            console.log('AdminIntegration: No admin data found in localStorage');
+            this.adminData = null;
         }
     }
 
     applySectionVisibility() {
+        console.log('AdminIntegration: Applying section visibility...');
+        
+        // Get all sections in the page
+        const allSections = ['home', 'ricerca', 'comparatore', 'simulatore', 'portafoglio', 'fire', 'brokers', 'blog'];
+        
         if (!this.adminData || !this.adminData.sections) {
+            console.log('AdminIntegration: No admin data - showing all sections');
+            // Show all sections by default
+            allSections.forEach(sectionKey => {
+                this.showSection(sectionKey);
+            });
             return;
         }
 
         const sections = this.adminData.sections;
+        console.log('AdminIntegration: Processing sections:', sections);
         
-        // Apply visibility settings to each section
-        Object.entries(sections).forEach(([sectionKey, sectionData]) => {
-            const sectionElement = document.getElementById(sectionKey);
-            const navElement = document.querySelector(`[href="#${sectionKey}"]`);
-            
-            if (sectionElement) {
-                if (sectionData.visible) {
-                    sectionElement.style.display = '';
-                } else {
-                    sectionElement.style.display = 'none';
-                }
-            }
-            
-            if (navElement) {
-                const navItem = navElement.closest('li') || navElement.closest('.nav-item');
-                if (navItem) {
-                    if (sectionData.visible) {
-                        navItem.style.display = '';
-                    } else {
-                        navItem.style.display = 'none';
-                    }
-                }
-            }
+        // First, hide all sections
+        allSections.forEach(sectionKey => {
+            this.hideSection(sectionKey);
         });
+        
+        // Then show only visible sections in correct order
+        const sortedSections = Object.entries(sections)
+            .filter(([key, data]) => data.visible)
+            .sort((a, b) => a[1].order - b[1].order);
+            
+        console.log('AdminIntegration: Visible sections in order:', sortedSections);
+        
+        sortedSections.forEach(([sectionKey, sectionData]) => {
+            this.showSection(sectionKey);
+            this.reorderSection(sectionKey, sectionData.order);
+        });
+        
+        // Force a layout recalculation
+        document.body.offsetHeight;
 
         // Reorder sections based on admin settings
         this.reorderSections();
@@ -318,6 +365,104 @@ class AdminIntegration {
         this.loadAdminData();
         this.applySectionVisibility();
         this.initializeContent();
+    }
+    
+    showSection(sectionKey) {
+        const sectionElement = document.getElementById(sectionKey);
+        const navElement = document.querySelector(`[href="#${sectionKey}"]`);
+        
+        if (sectionElement) {
+            sectionElement.style.display = 'block';
+            sectionElement.style.visibility = 'visible';
+            sectionElement.style.opacity = '1';
+            console.log(`AdminIntegration: Showing section ${sectionKey}`);
+        }
+        
+        if (navElement) {
+            const navParent = navElement.closest('li');
+            if (navParent) {
+                navParent.style.display = 'block';
+            }
+        }
+    }
+    
+    hideSection(sectionKey) {
+        const sectionElement = document.getElementById(sectionKey);
+        const navElement = document.querySelector(`[href="#${sectionKey}"]`);
+        
+        if (sectionElement) {
+            sectionElement.style.display = 'none';
+            sectionElement.style.visibility = 'hidden';
+            sectionElement.style.opacity = '0';
+            console.log(`AdminIntegration: Hiding section ${sectionKey}`);
+        }
+        
+        if (navElement) {
+            const navParent = navElement.closest('li');
+            if (navParent) {
+                navParent.style.display = 'none';
+            }
+        }
+    }
+    
+    reorderSection(sectionKey, order) {
+        const sectionElement = document.getElementById(sectionKey);
+        if (sectionElement && sectionElement.parentNode) {
+            sectionElement.style.order = order;
+            console.log(`AdminIntegration: Set order ${order} for section ${sectionKey}`);
+        }
+    }
+    
+    forceRefresh() {
+        console.log('AdminIntegration: Force refreshing...');
+        this.loadAdminData();
+        this.applySectionVisibility();
+    }
+    
+    checkForUpdates() {
+        const currentData = localStorage.getItem('adminData');
+        const currentHash = currentData ? this.hashCode(currentData) : null;
+        
+        if (currentHash !== this.lastDataHash) {
+            console.log('AdminIntegration: Data changed, updating...');
+            this.lastDataHash = currentHash;
+            
+            if (currentData) {
+                try {
+                    const newData = JSON.parse(currentData);
+                    console.log('AdminIntegration: New sections data:', newData?.sections);
+                    this.adminData = newData;
+                    this.applySectionVisibility();
+                    
+                    // Force a visual update
+                    this.forceVisualUpdate();
+                } catch (error) {
+                    console.error('AdminIntegration: Error parsing updated data:', error);
+                }
+            }
+        }
+    }
+    
+    forceVisualUpdate() {
+        // Force browser to recalculate layout
+        document.body.style.display = 'none';
+        document.body.offsetHeight; // Trigger reflow
+        document.body.style.display = '';
+        
+        // Scroll to top to make changes more visible
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        console.log('AdminIntegration: Forced visual update');
+    }
+    
+    hashCode(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash;
     }
 }
 
