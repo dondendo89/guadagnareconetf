@@ -54,38 +54,56 @@ class AdminPanel {
 
     handleLogin(e) {
         e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const errorMessage = document.getElementById('errorMessage');
-
-        if (username === this.adminData.settings.adminUsername && 
-            password === this.adminData.settings.adminPassword) {
-            this.isAuthenticated = true;
-            localStorage.setItem('adminAuth', 'true');
-            this.showAdminPanel();
-            errorMessage.style.display = 'none';
-        } else {
-            errorMessage.style.display = 'block';
-            setTimeout(() => {
-                errorMessage.style.display = 'none';
-            }, 3000);
-        }
+        
+        // AUTHENTICATION DISABLED - Auto login
+        console.log('Admin: Login attempted but authentication is disabled - auto-login');
+        this.isAuthenticated = true;
+        this.showAdminPanel();
+        
+        // Original login logic (commented out):
+        // const username = document.getElementById('username').value;
+        // const password = document.getElementById('password').value;
+        // const errorMessage = document.getElementById('errorMessage');
+        //
+        // if (username === this.adminData.settings.adminUsername && 
+        //     password === this.adminData.settings.adminPassword) {
+        //     this.isAuthenticated = true;
+        //     localStorage.setItem('adminAuth', 'true');
+        //     this.showAdminPanel();
+        //     errorMessage.style.display = 'none';
+        // } else {
+        //     errorMessage.style.display = 'block';
+        //     setTimeout(() => {
+        //         errorMessage.style.display = 'none';
+        //     }, 3000);
+        // }
     }
 
     handleLogout() {
-        this.isAuthenticated = false;
-        localStorage.removeItem('adminAuth');
-        this.showLoginForm();
+        // AUTHENTICATION DISABLED - Logout disabled
+        console.log('Admin: Logout attempted but authentication is disabled');
+        alert('Autenticazione disabilitata - Logout non disponibile');
+        
+        // Original logout logic (commented out):
+        // this.isAuthenticated = false;
+        // localStorage.removeItem('adminAuth');
+        // this.showLoginForm();
     }
 
     checkAuthentication() {
-        const authStatus = localStorage.getItem('adminAuth');
-        if (authStatus === 'true') {
-            this.isAuthenticated = true;
-            this.showAdminPanel();
-        } else {
-            this.showLoginForm();
-        }
+        // AUTHENTICATION DISABLED - Direct access to admin panel
+        console.log('Admin: Authentication disabled - showing admin panel directly');
+        this.isAuthenticated = true;
+        this.showAdminPanel();
+        
+        // Comment out original authentication logic:
+        // const isLoggedIn = localStorage.getItem('adminLoggedIn');
+        // if (isLoggedIn === 'true') {
+        //     this.isAuthenticated = true;
+        //     this.showAdminPanel();
+        // } else {
+        //     this.showLoginForm();
+        // }
     }
 
     showLoginForm() {
