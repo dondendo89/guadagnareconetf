@@ -15,12 +15,21 @@ class handler(BaseHTTPRequestHandler):
             self.end_headers()
             
             # Read blog-data.js file
-            blog_data_path = os.path.join(
-                os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
-                'blog-data.js'
-            )
+            # Try multiple possible paths for blog-data.js
+            possible_paths = [
+                os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'js', 'blog-data.js'),
+                os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'blog-data.js'),
+                os.path.join('/var/task', 'js', 'blog-data.js'),
+                os.path.join('/var/task', 'blog-data.js')
+            ]
             
-            if os.path.exists(blog_data_path):
+            blog_data_path = None
+            for path in possible_paths:
+                if os.path.exists(path):
+                    blog_data_path = path
+                    break
+            
+            if blog_data_path and os.path.exists(blog_data_path):
                 with open(blog_data_path, 'r', encoding='utf-8') as f:
                     content = f.read()
                     
@@ -48,9 +57,18 @@ class handler(BaseHTTPRequestHandler):
                         'timestamp': datetime.now().isoformat()
                     }
             else:
+                # Debug information for troubleshooting
+                debug_info = {
+                    'checked_paths': possible_paths,
+                    'current_dir': os.getcwd(),
+                    'file_path': os.path.abspath(__file__),
+                    'parent_dir': os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                }
+                
                 response = {
                     'status': 'error',
-                    'message': 'blog-data.js not found',
+                    'message': 'blog-data.js file not found',
+                    'debug': debug_info,
                     'articles': [],
                     'count': 0,
                     'timestamp': datetime.now().isoformat()
