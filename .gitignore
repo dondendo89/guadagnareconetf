@@ -1,1 +1,9 @@
 .vercel
+
+# Environment variables (contains sensitive data)
+.env
+.env.local
+.env.production
+
+# Admin credentials and sensitive configuration
+config/credentials.json

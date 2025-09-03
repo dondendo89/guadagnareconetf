@@ -16,8 +16,8 @@ class AdminPanel {
             articles: [],
             settings: {
                 siteName: 'GuadagnareConETF',
-                adminUsername: 'admin',
-                adminPassword: 'admin123'
+                adminUsername: '',
+                adminPassword: ''
             }
         };
         this.loadData();
@@ -494,8 +494,12 @@ class AdminPanel {
                         <input type="text" id="adminUsername" value="${settings.adminUsername}">
                     </div>
                     <div class="form-group">
-                        <label for="adminPassword">Password Admin</label>
-                        <input type="password" id="adminPassword" value="${settings.adminPassword}">
+                        <label for="adminPassword">Nuova Password Admin (lascia vuoto per non modificare)</label>
+                        <input type="password" id="adminPassword" placeholder="Inserisci nuova password">
+                        <small class="text-muted">La password attuale non viene mostrata per sicurezza</small>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-warning" onclick="adminPanel.generateNewPassword()">Genera Password Sicura</button>
                     </div>
                     <div class="form-actions">
                         <button type="button" class="btn btn-success" onclick="adminPanel.saveSettings()">Salva Impostazioni</button>
@@ -701,14 +705,22 @@ class AdminPanel {
         const adminUsername = document.getElementById('adminUsername').value;
         const adminPassword = document.getElementById('adminPassword').value;
         
-        this.adminData.settings = {
-            siteName,
-            adminUsername,
-            adminPassword
-        };
+        // Update settings
+        this.adminData.settings.siteName = siteName;
+        this.adminData.settings.adminUsername = adminUsername;
+        
+        // Only update password if a new one is provided
+        if (adminPassword && adminPassword.trim() !== '') {
+            this.adminData.settings.adminPassword = adminPassword;
+            alert('Impostazioni salvate con successo! Password aggiornata.');
+        } else {
+            alert('Impostazioni salvate con successo!');
+        }
         
         this.saveData();
-        alert('Impostazioni salvate con successo!');
+        
+        // Clear password field for security
+        document.getElementById('adminPassword').value = '';
     }
 
     exportData() {
@@ -876,10 +888,6 @@ class AdminPanel {
 
     // Data Management
     saveData() {
-        // Ensure admin credentials are always correct before saving
-        this.adminData.settings.adminUsername = 'admin';
-        this.adminData.settings.adminPassword = 'admin123';
-        
         localStorage.setItem('adminData', JSON.stringify(this.adminData));
         
         // Auto backup every 30 minutes
@@ -897,10 +905,51 @@ class AdminPanel {
         if (savedData) {
             const parsed = JSON.parse(savedData);
             this.adminData = { ...this.adminData, ...parsed };
-            // Ensure admin credentials are always correct
-            this.adminData.settings.adminUsername = 'admin';
-            this.adminData.settings.adminPassword = 'admin123';
         }
+        
+        // Initialize credentials if not set
+        if (!this.adminData.settings.adminUsername || !this.adminData.settings.adminPassword) {
+            this.initializeCredentials();
+        }
+    }
+
+    initializeCredentials() {
+        // Generate secure random credentials on first setup
+        const randomPassword = this.generateSecurePassword();
+        
+        this.adminData.settings.adminUsername = 'admin';
+        this.adminData.settings.adminPassword = randomPassword;
+        
+        // Show setup dialog to user
+        this.showCredentialsSetup(randomPassword);
+        
+        this.saveData();
+    }
+    
+    generateSecurePassword() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+        let password = '';
+        for (let i = 0; i < 12; i++) {
+            password += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return password;
+    }
+    
+    showCredentialsSetup(password) {
+        const message = `IMPORTANTE: Credenziali admin generate automaticamente per sicurezza:\n\nUsername: admin\nPassword: ${password}\n\nSalva queste credenziali in un posto sicuro! Questa è l'unica volta che verranno mostrate.`;
+        alert(message);
+        
+        // Also log to console for development
+        console.log('Admin Credentials Generated:', {
+            username: 'admin',
+            password: password
+        });
+    }
+    
+    generateNewPassword() {
+        const newPassword = this.generateSecurePassword();
+        document.getElementById('adminPassword').value = newPassword;
+        alert(`Nuova password generata: ${newPassword}\n\nSalva questa password in un posto sicuro!`);
     }
 
     loadDefaultData() {
