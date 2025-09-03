@@ -180,6 +180,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="js/blog-data.js"></script>
     <script src="js/admin-integration.js"></script>
     <script src="js/main.js"></script>
     <script>
@@ -207,19 +208,20 @@
                 const article = JSON.parse(storedArticle);
                 displayArticle(article);
             } else {
-                // Try to load from admin data
-                if (window.adminIntegration) {
-                    const publishedArticles = window.adminIntegration.getPublishedArticles();
-                    const article = publishedArticles.find(a => {
+                // Try to load from blog data
+                if (window.blogArticles && window.blogArticles.length > 0) {
+                    const article = window.blogArticles.find(a => {
                         // Check by ID
                         if (a.id && a.id.toString() === articleId) return true;
                         
-                        // Check by hash code
-                        if (window.adminIntegration.hashCode(a.title).toString() === articleId) return true;
+                        // Check by hash code (if adminIntegration is available)
+                        if (window.adminIntegration && window.adminIntegration.hashCode(a.title).toString() === articleId) return true;
                         
                         // Check by slug (for direct URL access)
-                        const articleSlug = window.adminIntegration.createSlug(a.title);
-                        if (articleSlug === articleId || articleSlug === slug) return true;
+                        if (window.adminIntegration) {
+                            const articleSlug = window.adminIntegration.createSlug(a.title);
+                            if (articleSlug === articleId || articleSlug === slug) return true;
+                        }
                         
                         return false;
                     });
@@ -344,9 +346,8 @@
         function loadRelatedArticles() {
             const relatedContainer = document.getElementById('relatedArticles');
             
-            if (window.adminIntegration) {
-                const publishedArticles = window.adminIntegration.getPublishedArticles();
-                const relatedArticles = publishedArticles.slice(0, 3); // Show first 3 articles
+            if (window.blogArticles && window.blogArticles.length > 0 && window.adminIntegration) {
+                const relatedArticles = window.blogArticles.slice(0, 3); // Show first 3 articles
                 
                 if (relatedArticles.length > 0) {
                     relatedContainer.innerHTML = '';
