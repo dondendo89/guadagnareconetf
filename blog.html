@@ -256,67 +256,15 @@
             updateBlogSidebar();
         }
         
-        // Load sample blog articles
+        // Load real blog articles only
         function loadSampleBlogArticles(container) {
-            // Use real articles from adminIntegration if available
+            // Use only real articles from adminIntegration
             let articles = [];
             if (window.adminIntegration) {
                 articles = window.adminIntegration.getPublishedArticles();
             }
             
-            // Fallback to sample articles if no real articles are available
-            if (articles.length === 0) {
-                articles = [
-                {
-                    id: 'analisi-mercati-etf-azionari-in-crescita-nel-q4-2024',
-                    title: 'Analisi Mercati: ETF Azionari in Crescita nel Q4 2024',
-                    excerpt: 'I mercati azionari europei mostrano segnali positivi con gli ETF che registrano performance superiori alle aspettative. Analizziamo i migliori ETF azionari per il prossimo trimestre.',
-                    date: '15 Gen 2024',
-                    category: 'analisi',
-                    tags: ['ETF', 'Mercati', 'Analisi']
-                },
-                {
-                    id: 'guida-completa-agli-etf-obbligazionari-italiani',
-                    title: 'Guida Completa agli ETF Obbligazionari Italiani',
-                    excerpt: 'Tutto quello che devi sapere sugli ETF obbligazionari quotati su Borsa Italiana per diversificare il tuo portafoglio e ridurre il rischio.',
-                    date: '12 Gen 2024',
-                    category: 'guida',
-                    tags: ['ETF', 'Obbligazioni', 'Guida']
-                },
-                {
-                    id: 'strategia-fire-come-raggiungere-indipendenza-finanziaria',
-                    title: 'Strategia FIRE: Come Raggiungere l\'Indipendenza Finanziaria',
-                    excerpt: 'Scopri come utilizzare gli ETF per costruire una strategia FIRE efficace e raggiungere l\'indipendenza finanziaria in Italia.',
-                    date: '10 Gen 2024',
-                    category: 'strategia',
-                    tags: ['FIRE', 'Strategia', 'Investimenti']
-                },
-                {
-                    id: 'i-migliori-etf-tecnologici-per-il-2024',
-                    title: 'I Migliori ETF Tecnologici per il 2024',
-                    excerpt: 'Analisi approfondita dei migliori ETF del settore tecnologico disponibili su Borsa Italiana, con focus su AI e innovazione.',
-                    date: '8 Gen 2024',
-                    category: 'analisi',
-                    tags: ['Tecnologia', 'ETF', 'AI']
-                },
-                {
-                    id: 'come-costruire-un-portafoglio-etf-diversificato',
-                    title: 'Come Costruire un Portafoglio ETF Diversificato',
-                    excerpt: 'Guida pratica per costruire un portafoglio ETF ben diversificato, bilanciando rischio e rendimento secondo i tuoi obiettivi.',
-                    date: '5 Gen 2024',
-                    category: 'guida',
-                    tags: ['Portafoglio', 'Diversificazione', 'ETF']
-                },
-                {
-                    id: 'etf-esg-investire-in-modo-sostenibile',
-                    title: 'ETF ESG: Investire in Modo Sostenibile',
-                    excerpt: 'Tutto sui fondi ESG quotati su Borsa Italiana: come investire in modo sostenibile senza rinunciare ai rendimenti.',
-                    date: '3 Gen 2024',
-                    category: 'news',
-                    tags: ['ESG', 'Sostenibilità', 'ETF']
-                }
-            ];
-            }
+            // No fallback to sample articles - show only real articles
             
             container.innerHTML = '';
             articles.forEach(article => {

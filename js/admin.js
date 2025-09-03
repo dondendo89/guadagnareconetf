@@ -1015,8 +1015,7 @@ class AdminPanel {
             this.initializeCredentials();
         }
         
-        // Sync articles from blog-data.js to ensure consistency
-        await this.syncArticlesFromBlogData();
+        // Note: Articles can be synced manually from the blog manager if needed
     }
 
     initializeCredentials() {
@@ -1149,13 +1148,49 @@ class AdminPanel {
         console.log('Admin: Syncing articles from blog-data.js...');
         
         try {
-            const response = await fetch('/api/blog-data');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            // Try different endpoints based on environment
+            let response;
+            let data;
+            
+            // First try the production API endpoint
+            try {
+                response = await fetch('/api/blog-data');
+                if (response.ok) {
+                    data = await response.json();
+                } else {
+                    console.log('Production API returned status:', response.status);
+                }
+            } catch (e) {
+                console.log('Production API not available, trying local endpoint...');
             }
             
-            const data = await response.json();
-            console.log('Admin: Loaded articles from blog-data.js:', data.articles.length);
+            // If production API fails, try local endpoint
+            if (!data) {
+                try {
+                    response = await fetch('/api/articles');
+                    if (response.ok) {
+                        const localData = await response.json();
+                        data = { articles: localData }; // Wrap in expected format
+                    } else {
+                        console.log('Local API returned status:', response.status);
+                    }
+                } catch (e) {
+                    console.log('Local API not available, loading from blog-data.js directly...');
+                }
+            }
+            
+            // If both APIs fail, try to load blog-data.js directly
+            if (!data && window.blogArticles) {
+                console.log('Using blog-data.js articles directly...');
+                data = { articles: window.blogArticles };
+            }
+            
+            if (!data || !data.articles) {
+                console.log('No articles found, initializing empty array');
+                data = { articles: [] };
+            }
+            
+            console.log('Admin: Loaded articles:', data.articles.length);
             
             // Update admin data with articles from blog-data.js
             this.adminData.articles = data.articles;
@@ -1183,7 +1218,8 @@ class AdminPanel {
         try {
             console.log('Updating blog-data.js with articles:', this.adminData.articles.length);
             
-            const response = await fetch('/api/blog-data', {
+            // Try production API first
+            let response = await fetch('/api/blog-data', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1194,13 +1230,35 @@ class AdminPanel {
                 })
             });
 
-            console.log('Response status:', response.status);
-            console.log('Response ok:', response.ok);
-
+            console.log('Production API response status:', response.status);
+            
             if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Response error text:', errorText);
-                throw new Error(`HTTP error! status: ${response.status}, text: ${errorText}`);
+                console.log('Production API not available, trying local API...');
+                
+                // Try local API
+                try {
+                    response = await fetch('http://localhost:8001/api/blog-data', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            action: 'update_articles',
+                            articles: this.adminData.articles
+                        })
+                    });
+                    
+                    console.log('Local API response status:', response.status);
+                    
+                    if (!response.ok) {
+                        console.log('Local API also not available. Changes saved locally only.');
+                        return;
+                    }
+                } catch (localError) {
+                    console.log('Local API not available:', localError.message);
+                    console.log('Changes saved locally only.');
+                    return;
+                }
             }
 
             const result = await response.json();
@@ -1211,7 +1269,7 @@ class AdminPanel {
             
         } catch (error) {
             console.error('Error updating blog-data.js:', error);
-            alert('Errore durante l\'aggiornamento del file blog-data.js. L\'articolo è stato eliminato dall\'admin ma potrebbe non essere aggiornato sul sito principale.');
+            console.log('Changes saved locally only.');
         }
     }
 }

@@ -170,30 +170,48 @@ function updateAIStats() {
  */
 async function loadArticlesFromAPI() {
     try {
-        const response = await fetch('/api/blog-data');
+        // Try production API first
+        let response = await fetch('/api/blog-data');
+        let data = null;
+        
         if (response.ok) {
-            const data = await response.json();
-            
+            data = await response.json();
+        } else {
+            // Try local API
+            try {
+                response = await fetch('http://localhost:8001/api/blog-data');
+                if (response.ok) {
+                    data = await response.json();
+                }
+            } catch (localError) {
+                console.log('Local API not available for AI stats');
+            }
+        }
+        
+        if (data) {
             // Aggiorna le statistiche con i dati dell'API
             const aiStatsElement = document.getElementById('aiStats');
             if (aiStatsElement) {
                 aiStatsElement.innerHTML = `
                     <div class="ai-stats">
                         <h4>📊 Statistiche AI</h4>
-                        <p>Articoli AI: <strong>${data.ai_count}</strong></p>
-                        <p>Articoli Manuali: <strong>${data.count - data.ai_count}</strong></p>
-                        <p>Totale: <strong>${data.count}</strong></p>
+                        <p>Articoli AI: <strong>${data.ai_count || 0}</strong></p>
+                        <p>Articoli Manuali: <strong>${(data.count || 0) - (data.ai_count || 0)}</strong></p>
+                        <p>Totale: <strong>${data.count || 0}</strong></p>
                     </div>
                 `;
             }
             
             const totalArticlesElement = document.getElementById('totalArticles');
             if (totalArticlesElement) {
-                totalArticlesElement.textContent = data.count;
+                totalArticlesElement.textContent = data.count || 0;
             }
+        } else {
+            // Fallback to local data if available
+            console.log('Using local article data for AI stats');
         }
     } catch (error) {
-        console.warn('Errore nel caricamento articoli da API:', error);
+        console.log('API not available for AI stats, using local data');
     }
 }
 
