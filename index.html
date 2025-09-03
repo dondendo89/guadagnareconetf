@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ETF Italia - La piattaforma completa per analizzare, confrontare e monitorare ETF quotati su Borsa Italiana. Strumenti avanzati per investitori italiani.">
+    <meta name="keywords" content="ETF Italia, investimenti, Borsa Italiana, fondi, finanza personale, portafoglio">
+    <meta name="author" content="ETF Italia">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ETF Italia - Analizza e Confronta ETF Italiani">
+    <meta property="og:description" content="La piattaforma completa per investitori italiani. Confronta ETF, simula rendimenti e costruisci il tuo portafoglio ideale.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://etfitalia.it">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ETF Italia - Analizza e Confronta ETF Italiani">
+    <meta name="twitter:description" content="La piattaforma completa per investitori italiani.">
+    
+    <title>ETF Italia - Analizza e Confronta ETF Quotati su Borsa Italiana</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="/" class="logo">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect width="32" height="32" rx="8" fill="#2563eb"/>
+                            <path d="M8 12h16v2H8v-2zm0 4h16v2H8v-2zm0 4h12v2H8v-2z" fill="white"/>
+                        </svg>
+                        <span>ETF Italia</span>
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="navMenu">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#ricerca" class="nav-link">Ricerca ETF</a></li>
+                        <li><a href="#comparatore" class="nav-link">Comparatore</a></li>
+                        <li><a href="#simulatore" class="nav-link">Simulatore</a></li>
+                        <li><a href="#portafoglio" class="nav-link">Portafoglio</a></li>
+                        <li><a href="#fire" class="nav-link">Tool FIRE</a></li>
+                        <li><a href="#blog" class="nav-link">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        La Piattaforma Completa per
+                        <span class="highlight">ETF Italiani</span>
+                    </h1>
+                    <p class="hero-description">
+                        Analizza, confronta e monitora ETF quotati su Borsa Italiana con strumenti avanzati.
+                        Costruisci il tuo portafoglio ideale e raggiungi l'indipendenza finanziaria.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#ricerca" class="btn btn-primary">Inizia Subito</a>
+                        <a href="#simulatore" class="btn btn-secondary">Simula Investimento</a>
+                    </div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="etfCount">500+</div>
+                        <div class="stat-label">ETF Monitorati</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">€2.5T</div>
+                        <div class="stat-label">Patrimonio Gestito</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Settori Coperti</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETF Search Section -->
+        <section id="ricerca" class="search-section">
+            <div class="container">
+                <h2 class="section-title">Trova l'ETF Perfetto</h2>
+                <p class="section-description">
+                    Utilizza i nostri filtri avanzati per trovare gli ETF che corrispondono ai tuoi obiettivi di investimento.
+                </p>
+                
+                <div class="search-container">
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <label for="searchInput">Cerca per nome o ISIN</label>
+                            <input type="text" id="searchInput" placeholder="Es. VWCE, IE00BK5BQT80">
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="sectorFilter">Settore</label>
+                            <select id="sectorFilter">
+                                <option value="">Tutti i settori</option>
+                                <option value="azionario">Azionario</option>
+                                <option value="obbligazionario">Obbligazionario</option>
+                                <option value="commodities">Commodities</option>
+                                <option value="immobiliare">Immobiliare</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="regionFilter">Regione</label>
+                            <select id="regionFilter">
+                                <option value="">Tutte le regioni</option>
+                                <option value="europa">Europa</option>
+                                <option value="usa">Stati Uniti</option>
+                                <option value="asia">Asia</option>
+                                <option value="emergenti">Mercati Emergenti</option>
+                                <option value="globale">Globale</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="terFilter">TER Massimo (%)</label>
+                            <input type="range" id="terFilter" min="0" max="2" step="0.1" value="1">
+                            <span id="terValue">1.0%</span>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="distributionFilter">Distribuzione</label>
+                            <select id="distributionFilter">
+                                <option value="">Tutti</option>
+                                <option value="accumulating">Accumulazione</option>
+                                <option value="distributing">Distribuzione</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="searchBtn">Cerca ETF</button>
+                    </div>
+                    
+                    <div class="search-results" id="searchResults">
+                        <!-- Results will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETF Comparator Section -->
+        <section id="comparatore" class="comparator-section">
+            <div class="container">
+                <h2 class="section-title">Comparatore ETF</h2>
+                <p class="section-description">
+                    Confronta fino a 5 ETF per prendere decisioni di investimento informate.
+                </p>
+                
+                <div class="comparator-container">
+                    <div class="etf-selector">
+                        <h3>Seleziona ETF da Confrontare</h3>
+                        <div class="selected-etfs" id="selectedEtfs">
+                            <!-- Selected ETFs will appear here -->
+                        </div>
+                        <button class="btn btn-secondary" id="addEtfBtn">+ Aggiungi ETF</button>
+                    </div>
+                    
+                    <div class="comparison-table" id="comparisonTable">
+                        <!-- Comparison table will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETF Simulator Section -->
+        <section id="simulatore" class="simulator-section">
+            <div class="container">
+                <h2 class="section-title">Simulatore di Investimento</h2>
+                <p class="section-description">
+                    Calcola il potenziale rendimento del tuo investimento in ETF nel tempo.
+                </p>
+                
+                <div class="simulator-container">
+                    <div class="simulator-inputs">
+                        <div class="input-group">
+                            <label for="initialAmount">Investimento Iniziale (€)</label>
+                            <input type="number" id="initialAmount" value="10000" min="100" step="100">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="monthlyAmount">Versamento Mensile (€)</label>
+                            <input type="number" id="monthlyAmount" value="500" min="0" step="50">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="investmentPeriod">Periodo di Investimento (anni)</label>
+                            <input type="range" id="investmentPeriod" min="1" max="40" value="20">
+                            <span id="periodValue">20 anni</span>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="expectedReturn">Rendimento Annuo Atteso (%)</label>
+                            <input type="range" id="expectedReturn" min="1" max="15" step="0.5" value="7">
+                            <span id="returnValue">7.0%</span>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="simulateBtn">Simula Investimento</button>
+                    </div>
+                    
+                    <div class="simulator-results" id="simulatorResults">
+                        <div class="result-chart">
+                            <canvas id="investmentChart"></canvas>
+                        </div>
+                        
+                        <div class="result-summary">
+                            <div class="result-item">
+                                <span class="result-label">Capitale Investito:</span>
+                                <span class="result-value" id="totalInvested">€0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Valore Finale:</span>
+                                <span class="result-value" id="finalValue">€0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Guadagno Totale:</span>
+                                <span class="result-value" id="totalGain">€0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Builder Section -->
+        <section id="portafoglio" class="portfolio-section">
+            <div class="container">
+                <h2 class="section-title">Costruttore di Portafoglio</h2>
+                <p class="section-description">
+                    Crea e ottimizza il tuo portafoglio ETF personalizzato.
+                </p>
+                
+                <div class="portfolio-container">
+                    <div class="portfolio-builder">
+                        <h3>Il Tuo Portafoglio</h3>
+                        <div class="portfolio-items" id="portfolioItems">
+                            <!-- Portfolio items will be added here -->
+                        </div>
+                        <button class="btn btn-secondary" id="addToPortfolioBtn">+ Aggiungi ETF</button>
+                    </div>
+                    
+                    <div class="portfolio-analysis">
+                        <h3>Analisi del Portafoglio</h3>
+                        <div class="portfolio-chart">
+                            <canvas id="portfolioChart"></canvas>
+                        </div>
+                        
+                        <div class="portfolio-metrics">
+                            <div class="metric-item">
+                                <span class="metric-label">TER Medio:</span>
+                                <span class="metric-value" id="avgTer">0.0%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Diversificazione:</span>
+                                <span class="metric-value" id="diversification">-</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Rischio:</span>
+                                <span class="metric-value" id="riskLevel">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FIRE Calculator Section -->
+        <section id="fire" class="fire-section">
+            <div class="container">
+                <h2 class="section-title">Calcolatore FIRE</h2>
+                <p class="section-description">
+                    Scopri quando potrai raggiungere l'indipendenza finanziaria (Financial Independence, Retire Early).
+                </p>
+                
+                <div class="fire-container">
+                    <div class="fire-inputs">
+                        <div class="input-group">
+                            <label for="currentAge">Età Attuale</label>
+                            <input type="number" id="currentAge" value="30" min="18" max="65">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="currentSavings">Risparmi Attuali (€)</label>
+                            <input type="number" id="currentSavings" value="50000" min="0" step="1000">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="monthlyExpenses">Spese Mensili (€)</label>
+                            <input type="number" id="monthlyExpenses" value="2500" min="500" step="100">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="monthlySavings">Risparmio Mensile (€)</label>
+                            <input type="number" id="monthlySavings" value="1500" min="0" step="100">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="withdrawalRate">Tasso di Prelievo (%)</label>
+                            <input type="range" id="withdrawalRate" min="3" max="5" step="0.1" value="4">
+                            <span id="withdrawalValue">4.0%</span>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="calculateFireBtn">Calcola FIRE</button>
+                    </div>
+                    
+                    <div class="fire-results" id="fireResults">
+                        <div class="fire-summary">
+                            <div class="fire-item">
+                                <span class="fire-label">Capitale Necessario:</span>
+                                <span class="fire-value" id="fireNumber">€0</span>
+                            </div>
+                            <div class="fire-item">
+                                <span class="fire-label">Età FIRE:</span>
+                                <span class="fire-value" id="fireAge">-</span>
+                            </div>
+                            <div class="fire-item">
+                                <span class="fire-label">Anni Rimanenti:</span>
+                                <span class="fire-value" id="yearsToFire">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="fire-chart">
+                            <canvas id="fireChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="blog-section">
+            <div class="container">
+                <h2 class="section-title">Ultime Analisi ETF</h2>
+                <p class="section-description">
+                    Rimani aggiornato con le nostre analisi quotidiane sui mercati e gli ETF.
+                </p>
+                
+                <div class="blog-grid" id="blogGrid">
+                    <!-- Blog posts will be loaded here -->
+                </div>
+                
+                <div class="blog-actions">
+                    <a href="/blog" class="btn btn-secondary">Vedi Tutti gli Articoli</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ETF Italia</h3>
+                    <p>La piattaforma completa per investitori italiani interessati agli ETF quotati su Borsa Italiana.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">📱</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="YouTube">📺</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Strumenti</h4>
+                    <ul>
+                        <li><a href="#ricerca">Ricerca ETF</a></li>
+                        <li><a href="#comparatore">Comparatore</a></li>
+                        <li><a href="#simulatore">Simulatore</a></li>
+                        <li><a href="#portafoglio">Portafoglio</a></li>
+                        <li><a href="#fire">Calcolatore FIRE</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Risorse</h4>
+                    <ul>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/guida-etf">Guida agli ETF</a></li>
+                        <li><a href="/broker">Migliori Broker</a></li>
+                        <li><a href="/newsletter">Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legale</h4>
+                    <ul>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/termini">Termini di Servizio</a></li>
+                        <li><a href="/disclaimer">Disclaimer</a></li>
+                        <li><a href="/contatti">Contatti</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ETF Italia. Tutti i diritti riservati.</p>
+                <p class="disclaimer">Le informazioni fornite non costituiscono consigli di investimento. Investire comporta sempre dei rischi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/etf-search.js"></script>
+    <script src="js/comparator.js"></script>
+    <script src="js/simulator.js"></script>
+    <script src="js/portfolio.js"></script>
+    <script src="js/fire-calculator.js"></script>
+    <script src="js/etf-details.js"></script>
+    <script src="js/affiliate-system.js"></script>
+    <script src="js/api-integration.js"></script>
+</body>
+</html>
