@@ -14,24 +14,17 @@ class handler(BaseHTTPRequestHandler):
             self.send_header('Access-Control-Allow-Headers', 'Content-Type')
             self.end_headers()
             
-            # Read blog-data.js file
-            # Try multiple possible paths for blog-data.js
-            possible_paths = [
-                os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'js', 'blog-data.js'),
-                os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'blog-data.js'),
-                os.path.join('/var/task', 'js', 'blog-data.js'),
-                os.path.join('/var/task', 'blog-data.js')
-            ]
+            # Read blog-data.js file via HTTP request
+            import urllib.request
+            import urllib.error
             
-            blog_data_path = None
-            for path in possible_paths:
-                if os.path.exists(path):
-                    blog_data_path = path
-                    break
-            
-            if blog_data_path and os.path.exists(blog_data_path):
-                with open(blog_data_path, 'r', encoding='utf-8') as f:
-                    content = f.read()
+            try:
+                # Get the host from the request
+                host = self.headers.get('Host', 'guadagnareconetf.vercel.app')
+                blog_data_url = f'https://{host}/js/blog-data.js'
+                
+                with urllib.request.urlopen(blog_data_url) as response:
+                    content = response.read().decode('utf-8')
                     
                 # Extract JSON from JavaScript file
                 # Remove 'const blogArticles = ' and ';' to get pure JSON
@@ -56,19 +49,18 @@ class handler(BaseHTTPRequestHandler):
                         'count': 0,
                         'timestamp': datetime.now().isoformat()
                     }
-            else:
-                # Debug information for troubleshooting
-                debug_info = {
-                    'checked_paths': possible_paths,
-                    'current_dir': os.getcwd(),
-                    'file_path': os.path.abspath(__file__),
-                    'parent_dir': os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                }
-                
+            except urllib.error.URLError as e:
                 response = {
                     'status': 'error',
-                    'message': 'blog-data.js file not found',
-                    'debug': debug_info,
+                    'message': f'Failed to fetch blog-data.js: {str(e)}',
+                    'articles': [],
+                    'count': 0,
+                    'timestamp': datetime.now().isoformat()
+                }
+            except Exception as e:
+                response = {
+                    'status': 'error',
+                    'message': f'Error processing blog-data.js: {str(e)}',
                     'articles': [],
                     'count': 0,
                     'timestamp': datetime.now().isoformat()
