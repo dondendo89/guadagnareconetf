@@ -22,11 +22,10 @@ class AdminPanel {
                 adminPassword: ''
             }
         };
-        this.loadData();
-        this.init();
     }
 
-    init() {
+    async init() {
+        await this.loadData();
         this.setupEventListeners();
         this.checkAuthentication();
         this.loadDefaultData();
@@ -358,6 +357,12 @@ class AdminPanel {
         
         let html = `
             <div class="articles-list">
+                <button onclick="adminPanel.addArticle()" class="btn btn-primary mb-3 me-2">
+                    <i class="fas fa-plus"></i> Aggiungi Articolo
+                </button>
+                <button onclick="adminPanel.syncArticlesFromBlogData()" class="btn btn-info mb-3">
+                    <i class="fas fa-sync"></i> Sincronizza Articoli
+                </button>
                 <div class="articles-grid">
         `;
         
@@ -995,7 +1000,7 @@ class AdminPanel {
         }
     }
 
-    loadData() {
+    async loadData() {
         const savedData = localStorage.getItem('adminData');
         if (savedData) {
             const parsed = JSON.parse(savedData);
@@ -1009,6 +1014,9 @@ class AdminPanel {
         if (!this.adminData.settings.adminUsername || !this.adminData.settings.adminPassword) {
             this.initializeCredentials();
         }
+        
+        // Sync articles from blog-data.js to ensure consistency
+        await this.syncArticlesFromBlogData();
     }
 
     initializeCredentials() {
@@ -1137,8 +1145,44 @@ class AdminPanel {
         localStorage.setItem('adminUpdate', Date.now().toString());
     }
 
+    async syncArticlesFromBlogData() {
+        console.log('Admin: Syncing articles from blog-data.js...');
+        
+        try {
+            const response = await fetch('/api/blog-data');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log('Admin: Loaded articles from blog-data.js:', data.articles.length);
+            
+            // Update admin data with articles from blog-data.js
+            this.adminData.articles = data.articles;
+            this.saveData();
+            
+            console.log('Admin: Articles synced successfully');
+            
+            // Reload blog manager if currently viewing it
+            const currentSection = document.querySelector('.nav-link.active')?.getAttribute('data-section');
+            if (currentSection === 'blog') {
+                this.loadBlogManager();
+            }
+            
+            alert('Articoli sincronizzati con successo!');
+            return true;
+            
+        } catch (error) {
+            console.error('Admin: Error syncing articles:', error);
+            alert('Errore durante la sincronizzazione degli articoli');
+            return false;
+        }
+    }
+
     async updateBlogDataFile() {
         try {
+            console.log('Updating blog-data.js with articles:', this.adminData.articles.length);
+            
             const response = await fetch('/api/blog-data', {
                 method: 'POST',
                 headers: {
@@ -1150,8 +1194,13 @@ class AdminPanel {
                 })
             });
 
+            console.log('Response status:', response.status);
+            console.log('Response ok:', response.ok);
+
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorText = await response.text();
+                console.error('Response error text:', errorText);
+                throw new Error(`HTTP error! status: ${response.status}, text: ${errorText}`);
             }
 
             const result = await response.json();
@@ -1227,7 +1276,7 @@ function saveArticleFromEditor(articleData, index = null) {
 }
 
 // Initialize admin panel when page loads
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     window.adminPanel = new AdminPanel();
     
     // Initialize blog editor after a short delay
