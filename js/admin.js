@@ -1278,6 +1278,7 @@ function saveArticleFromEditor(articleData, index = null) {
 // Initialize admin panel when page loads
 window.addEventListener('DOMContentLoaded', async () => {
     window.adminPanel = new AdminPanel();
+    await window.adminPanel.init();
     
     // Initialize blog editor after a short delay
     setTimeout(() => {
