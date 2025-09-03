@@ -375,6 +375,7 @@ class AdminPanel {
                     </div>
                     <div class="article-actions">
                         <button class="btn btn-primary" onclick="editArticleAdvanced(${index})">Modifica</button>
+                        <button class="btn btn-info" onclick="adminPanel.viewArticleOnFrontend(${index})">Visualizza Articolo</button>
                         <button class="btn btn-success" onclick="adminPanel.toggleArticleStatus(${index})">
                             ${article.published ? 'Nascondi' : 'Pubblica'}
                         </button>
@@ -730,6 +731,33 @@ class AdminPanel {
             this.saveData();
             this.loadBlogManager();
         }
+    }
+
+    viewArticleOnFrontend(index) {
+        const article = this.adminData.articles[index];
+        if (!article) {
+            alert('Articolo non trovato!');
+            return;
+        }
+        
+        // Create a temporary article ID based on index for URL
+        const articleId = `article-${index}`;
+        
+        // Store the article temporarily for frontend access
+        const tempArticleData = {
+            ...article,
+            id: articleId,
+            timestamp: Date.now()
+        };
+        
+        // Store in sessionStorage for frontend access
+        sessionStorage.setItem('viewArticle', JSON.stringify(tempArticleData));
+        
+        // Open the frontend with article view
+        const frontendUrl = window.location.origin + window.location.pathname.replace('admin.html', 'index.html') + `#article=${articleId}`;
+        window.open(frontendUrl, '_blank');
+        
+        console.log('Opening article on frontend:', article.title);
     }
 
     // Settings Management

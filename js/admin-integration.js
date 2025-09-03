@@ -3,6 +3,8 @@ class AdminIntegration {
     constructor() {
         this.adminData = null;
         this.lastDataHash = null;
+        this.refreshAttempts = 0;
+        this.maxRefreshAttempts = 3;
         console.log('AdminIntegration: Initializing...');
         this.loadAdminData();
         console.log('AdminIntegration: Data loaded:', this.adminData);
@@ -95,6 +97,10 @@ class AdminIntegration {
 
         // Reorder sections based on admin settings
         this.reorderSections();
+        
+        // Reset refresh attempts counter on successful application
+        this.refreshAttempts = 0;
+        console.log('AdminIntegration: Section visibility applied successfully, reset refresh attempts');
     }
 
     reorderSections() {
@@ -265,92 +271,69 @@ class AdminIntegration {
 
         const articles = this.getPublishedArticles();
         
-        let html = '<div class="articles-list">';
-        
+        // If no published articles, show sample articles or let main.js handle it
         if (articles.length === 0) {
-            html += '<p class="no-articles">Nessun articolo pubblicato al momento.</p>';
-        } else {
-            articles.forEach(article => {
-                html += `
-                    <article class="article-item">
-                        <div class="article-header">
-                            <h3>${article.title}</h3>
-                            <span class="article-date">${article.date}</span>
-                        </div>
-                        <div class="article-excerpt">
-                            <p>${article.excerpt}</p>
-                        </div>
-                        <div class="article-content">
-                            <p>${article.content.substring(0, 200)}${article.content.length > 200 ? '...' : ''}</p>
-                        </div>
-                    </article>
-                `;
-            });
+            console.log('AdminIntegration: No published articles found, keeping existing content or showing sample articles');
+            // Don't override existing content if no admin articles are published
+            if (container.children.length === 0) {
+                // Only show "no articles" message if container is completely empty
+                container.innerHTML = '<p class="no-articles">Nessun articolo pubblicato al momento.</p>';
+            }
+            return;
         }
         
-        html += '</div>';
+        // Clear container and show admin articles
+        container.innerHTML = '';
         
-        // Add CSS if not already present
-        if (!document.getElementById('article-styles')) {
-            const style = document.createElement('style');
-            style.id = 'article-styles';
-            style.textContent = `
-                .articles-list {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2rem;
-                    margin: 1rem 0;
-                }
-                .article-item {
-                    border: 1px solid #e1e5e9;
-                    border-radius: 8px;
-                    padding: 2rem;
-                    background: white;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                }
-                .article-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 1rem;
-                    padding-bottom: 1rem;
-                    border-bottom: 1px solid #f0f0f0;
-                }
-                .article-header h3 {
-                    margin: 0;
-                    color: #333;
-                    font-size: 1.3rem;
-                }
-                .article-date {
-                    color: #888;
-                    font-size: 0.9rem;
-                }
-                .article-excerpt {
-                    margin-bottom: 1rem;
-                }
-                .article-excerpt p {
-                    font-weight: 600;
-                    color: #555;
-                    font-style: italic;
-                    margin: 0;
-                }
-                .article-content p {
-                    color: #666;
-                    line-height: 1.6;
-                    margin: 0;
-                }
-                .no-articles {
-                    text-align: center;
-                    color: #888;
-                    font-style: italic;
-                    padding: 2rem;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        container.innerHTML = html;
+        articles.forEach(article => {
+            const blogCard = this.createBlogCard(article);
+            container.appendChild(blogCard);
+        });
     }
+    
+    createBlogCard(article) {
+        const card = document.createElement('div');
+        card.className = 'blog-card';
+        
+        // Get category emoji
+        const categoryEmojis = {
+            'analisi': '📊',
+            'guida': '📚',
+            'strategia': '🎯',
+            'news': '📰',
+            'tutorial': '🔧'
+        };
+        
+        const emoji = categoryEmojis[article.category] || '📄';
+        
+        card.innerHTML = `
+            <div class="blog-image">${emoji}</div>
+            <div class="blog-content">
+                <h3 class="blog-title">${article.title}</h3>
+                <p class="blog-excerpt">${article.excerpt}</p>
+                <div class="blog-meta">
+                    <span class="blog-category">${article.category || 'Articolo'}</span>
+                    <span class="blog-date">${article.date}</span>
+                </div>
+            </div>
+        `;
+        
+        card.addEventListener('click', () => {
+            // Create URL-friendly slug from title
+            const slug = this.createSlug(article.title);
+            const articleId = article.id || this.hashCode(article.title).toString();
+            
+            // Store article data in sessionStorage for the article page
+            sessionStorage.setItem(`article_${articleId}`, JSON.stringify(article));
+            
+            // Navigate to article page
+            window.location.href = `article.html?id=${articleId}&slug=${slug}`;
+        });
+        
+        return card;
+    }
+    
+
 
     initializeContent() {
         // Wait a bit for DOM to be fully ready
@@ -358,6 +341,13 @@ class AdminIntegration {
             this.renderBrokers('brokersContainer');
             this.renderArticles('blogGrid');
         }, 100);
+    }
+
+    // Initialize blog page with all articles
+    initializeBlogPage() {
+        this.loadAdminData();
+        // Don't apply section visibility on blog page
+        // Don't call initializeContent as blog page has its own loading logic
     }
 
     // Method to refresh data when admin panel updates
@@ -426,6 +416,7 @@ class AdminIntegration {
         if (currentHash !== this.lastDataHash) {
             console.log('AdminIntegration: Data changed, updating...');
             this.lastDataHash = currentHash;
+            this.refreshAttempts++;
             
             if (currentData) {
                 try {
@@ -436,6 +427,14 @@ class AdminIntegration {
                     
                     // Force a visual update
                     this.forceVisualUpdate();
+                    
+                    // If too many refresh attempts, force page reload to clear cache
+                    if (this.refreshAttempts >= this.maxRefreshAttempts) {
+                        console.log('AdminIntegration: Too many refresh attempts, forcing page reload to clear cache');
+                        setTimeout(() => {
+                            window.location.reload(true);
+                        }, 1000);
+                    }
                 } catch (error) {
                     console.error('AdminIntegration: Error parsing updated data:', error);
                 }
@@ -449,12 +448,55 @@ class AdminIntegration {
         document.body.offsetHeight; // Trigger reflow
         document.body.style.display = '';
         
+        // Add timestamp to force cache invalidation
+        const timestamp = Date.now();
+        document.body.setAttribute('data-cache-bust', timestamp);
+        document.documentElement.setAttribute('data-cache-bust', timestamp);
+        
+        // Force CSS cache invalidation
+        const styleSheets = document.querySelectorAll('link[rel="stylesheet"]');
+        styleSheets.forEach(link => {
+            const href = link.href.split('?')[0];
+            link.href = href + '?v=' + timestamp;
+        });
+        
+        // Force style recalculation
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(el => {
+            el.style.transform = 'translateZ(0)';
+            setTimeout(() => {
+                el.style.transform = '';
+            }, 1);
+        });
+        
+        // Force repaint by changing a CSS property
+        document.body.style.opacity = '0.99';
+        setTimeout(() => {
+            document.body.style.opacity = '';
+        }, 10);
+        
         // Scroll to top to make changes more visible
         window.scrollTo({ top: 0, behavior: 'smooth' });
         
-        console.log('AdminIntegration: Forced visual update');
+        console.log('AdminIntegration: Forced visual update with aggressive cache bust:', timestamp);
     }
     
+    createSlug(title) {
+        return title
+            .toLowerCase()
+            .replace(/[àáâãäå]/g, 'a')
+            .replace(/[èéêë]/g, 'e')
+            .replace(/[ìíîï]/g, 'i')
+            .replace(/[òóôõö]/g, 'o')
+            .replace(/[ùúûü]/g, 'u')
+            .replace(/[ç]/g, 'c')
+            .replace(/[ñ]/g, 'n')
+            .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+            .replace(/\s+/g, '-') // Replace spaces with hyphens
+            .replace(/-+/g, '-') // Replace multiple hyphens with single
+            .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+    }
+
     hashCode(str) {
         let hash = 0;
         for (let i = 0; i < str.length; i++) {
@@ -462,7 +504,7 @@ class AdminIntegration {
             hash = ((hash << 5) - hash) + char;
             hash = hash & hash; // Convert to 32bit integer
         }
-        return hash;
+        return Math.abs(hash);
     }
 }
 

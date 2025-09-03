@@ -1,0 +1,77 @@
+2025-09-03 11:50:14,968 - INFO - 🚀 Server API ETF Italia avviato su porta 8001
+2025-09-03 11:50:14,968 - INFO - 📡 Endpoints disponibili:
+2025-09-03 11:50:14,969 - INFO -    POST /api/generate-articles - Genera articoli AI
+2025-09-03 11:50:14,969 - INFO -    GET  /api/status - Status del sistema
+2025-09-03 11:50:14,969 - INFO -    GET  /api/articles - Lista articoli
+2025-09-03 11:50:19,484 - INFO - 127.0.0.1 - code 404, message Endpoint non trovato
+2025-09-03 11:50:19,484 - INFO - 127.0.0.1 - "GET /?ide_webview_request_time=1756893019466 HTTP/1.1" 404 -
+2025-09-03 11:50:19,998 - INFO - 127.0.0.1 - code 404, message Endpoint non trovato
+2025-09-03 11:50:19,998 - INFO - 127.0.0.1 - "GET /@vite/client HTTP/1.1" 404 -
+2025-09-03 11:50:28,862 - INFO - 127.0.0.1 - "OPTIONS /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:50:28,868 - INFO - Richiesta generazione: 2 articoli, tipo: manual
+2025-09-03 11:50:28,883 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:50:39,761 - INFO - 127.0.0.1 - "OPTIONS /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:50:39,763 - INFO - Richiesta generazione: 2 articoli, tipo: manual
+2025-09-03 11:50:39,764 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:50:46,475 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:51:08,658 - INFO - 127.0.0.1 - "OPTIONS /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:51:08,663 - INFO - Richiesta generazione: 2 articoli, tipo: manual
+2025-09-03 11:51:08,666 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:51:16,445 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:51:36,803 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:51:41,753 - INFO - Richiesta generazione: 1 articoli, tipo: manual
+2025-09-03 11:51:41,758 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:51:59,619 - INFO - 127.0.0.1 - "OPTIONS /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:51:59,623 - INFO - Richiesta generazione: 2 articoli, tipo: manual
+2025-09-03 11:51:59,624 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:52:10,299 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:52:40,269 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:53:10,267 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:53:40,265 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:54:10,264 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:54:40,263 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:55:07,102 - INFO - 127.0.0.1 - "OPTIONS /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:55:07,105 - INFO - Richiesta generazione: 2 articoli, tipo: manual
+2025-09-03 11:55:07,114 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:55:10,263 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:55:28,938 - ERROR - Timeout nella generazione degli articoli
+2025-09-03 11:55:39,799 - ERROR - Timeout nella generazione degli articoli
+2025-09-03 11:55:40,261 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:55:55,630 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:56:08,709 - ERROR - Timeout nella generazione degli articoli
+2025-09-03 11:56:30,210 - INFO - 🚀 Server API ETF Italia avviato su porta 8001
+2025-09-03 11:56:30,210 - INFO - 📡 Endpoints disponibili:
+2025-09-03 11:56:30,210 - INFO -    POST /api/generate-articles - Genera articoli AI
+2025-09-03 11:56:30,210 - INFO -    GET  /api/status - Status del sistema
+2025-09-03 11:56:30,210 - INFO -    GET  /api/articles - Lista articoli
+2025-09-03 11:56:32,321 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:56:55,612 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:56:55,613 - INFO - Richiesta generazione: 1 articoli, tipo: manual
+2025-09-03 11:56:55,614 - INFO - Avvio generazione manual di 1 articoli...
+2025-09-03 11:56:55,617 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 11:57:25,611 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:57:55,610 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:58:25,608 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:58:55,607 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:59:25,607 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 11:59:55,606 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:00:25,605 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:00:55,602 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:01:35,406 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:01:47,611 - INFO - Richiesta generazione: 1 articoli, tipo: manual
+2025-09-03 12:01:47,612 - INFO - Avvio generazione manual di 1 articoli...
+2025-09-03 12:01:47,612 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 12:01:55,629 - ERROR - ⏰ Timeout nella generazione degli articoli
+2025-09-03 12:02:05,353 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:02:36,276 - INFO - 🚀 Server API ETF Italia avviato su porta 8001
+2025-09-03 12:02:36,277 - INFO - 📡 Endpoints disponibili:
+2025-09-03 12:02:36,277 - INFO -    POST /api/generate-articles - Genera articoli AI
+2025-09-03 12:02:36,277 - INFO -    GET  /api/status - Status del sistema
+2025-09-03 12:02:36,277 - INFO -    GET  /api/articles - Lista articoli
+2025-09-03 12:02:36,312 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:03:05,351 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:03:05,352 - INFO - Richiesta generazione: 1 articoli, tipo: manual
+2025-09-03 12:03:05,353 - INFO - Avvio generazione manual di 1 articoli...
+2025-09-03 12:03:05,353 - INFO - 127.0.0.1 - "POST /api/generate-articles HTTP/1.1" 200 -
+2025-09-03 12:03:35,350 - INFO - 127.0.0.1 - "GET /api/articles HTTP/1.1" 200 -
+2025-09-03 12:13:05,379 - ERROR - ⏰ Timeout nella generazione degli articoli

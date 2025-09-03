@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="ETF, investimenti, Borsa Italiana, finanza personale, articolo" id="articleKeywords">
+    <meta name="author" content="ETF Italia">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL (will be updated dynamically) -->
+    <link rel="canonical" href="https://etfitalia.com/article.html" id="canonicalUrl">
+    
+    <!-- Open Graph / Facebook (will be updated dynamically) -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://etfitalia.com/article.html" id="ogUrl">
+    <meta property="og:title" content="ETF Italia | Articolo" id="ogTitle">
+    <meta property="og:description" content="" id="ogDescription">
+    <meta property="og:image" content="https://etfitalia.com/images/article-og-image.jpg" id="ogImage">
+    <meta property="og:site_name" content="ETF Italia">
+    <meta property="og:locale" content="it_IT">
+    <meta property="article:author" content="ETF Italia">
+    
+    <!-- Twitter (will be updated dynamically) -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://etfitalia.com/article.html" id="twitterUrl">
+    <meta property="twitter:title" content="ETF Italia | Articolo" id="twitterTitle">
+    <meta property="twitter:description" content="" id="twitterDescription">
+    <meta property="twitter:site" content="@ETFItalia">
+    <meta property="twitter:creator" content="@ETFItalia">
+    
+    <title id="articleTitle">ETF Italia | Articolo</title>
+    <meta name="description" content="" id="articleDescription">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/">📈 ETF Italia</a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="/#hero" class="nav-link">Home</a></li>
+                        <li><a href="/#etf-search" class="nav-link">Cerca ETF</a></li>
+                        <li><a href="/#comparator" class="nav-link">Comparatore</a></li>
+                        <li><a href="/#brokers" class="nav-link">Broker</a></li>
+                        <li><a href="blog.html" class="nav-link">Blog</a></li>
+                        <li><a href="/#fire-calculator" class="nav-link">Calcolatore FIRE</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="window.location.href='admin.html'">Admin</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Article Content -->
+        <article class="article-page">
+            <div class="container">
+                <!-- Article Header -->
+                <header class="article-header">
+                    <nav class="breadcrumb">
+                        <a href="/">Home</a>
+                        <span class="breadcrumb-separator">›</span>
+                        <a href="blog.html">Blog</a>
+                        <span class="breadcrumb-separator">›</span>
+                        <span id="breadcrumbTitle">Articolo</span>
+                    </nav>
+                    
+                    <div class="article-meta-header">
+                        <span class="article-category" id="articleCategory">📊 Analisi</span>
+                        <time class="article-date" id="articleDate">Data non disponibile</time>
+                    </div>
+                    
+                    <h1 class="article-title" id="articleTitleMain">Titolo dell'articolo</h1>
+                    
+                    <div class="article-excerpt" id="articleExcerpt">
+                        Estratto dell'articolo...
+                    </div>
+                    
+                    <div class="article-tags" id="articleTags">
+                        <!-- Tags will be loaded here -->
+                    </div>
+                </header>
+                
+                <!-- Article Body -->
+                <div class="article-body">
+                    <div class="article-content" id="articleContent">
+                        <p>Contenuto dell'articolo in caricamento...</p>
+                    </div>
+                </div>
+                
+                <!-- Article Footer -->
+                <footer class="article-footer">
+                    <div class="article-actions">
+                        <button class="btn btn-secondary" onclick="history.back()">← Torna Indietro</button>
+                        <a href="blog.html" class="btn btn-primary">Vedi Altri Articoli</a>
+                    </div>
+                    
+                    <div class="article-share">
+                        <h4>Condividi questo articolo:</h4>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareOnTwitter()" title="Condividi su Twitter">🐦 Twitter</button>
+                            <button class="share-btn" onclick="shareOnLinkedIn()" title="Condividi su LinkedIn">💼 LinkedIn</button>
+                            <button class="share-btn" onclick="copyToClipboard()" title="Copia link">🔗 Copia Link</button>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </article>
+        
+        <!-- Related Articles -->
+        <section class="related-articles">
+            <div class="container">
+                <h2>Articoli Correlati</h2>
+                <div class="related-grid" id="relatedArticles">
+                    <!-- Related articles will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ETF Italia</h3>
+                    <p>La piattaforma completa per investitori italiani interessati agli ETF quotati su Borsa Italiana.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">📱</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="YouTube">📺</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Strumenti</h4>
+                    <ul>
+                        <li><a href="/#etf-search">Cerca ETF</a></li>
+                        <li><a href="/#comparator">Comparatore</a></li>
+                        <li><a href="/#fire-calculator">Calcolatore FIRE</a></li>
+                        <li><a href="/#portfolio">Portfolio Tracker</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Risorse</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="/#brokers">Broker Consigliati</a></li>
+                        <li><a href="#">Guide ETF</a></li>
+                        <li><a href="#">Analisi Mercati</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Informazioni</h4>
+                    <ul>
+                        <li><a href="#">Chi Siamo</a></li>
+                        <li><a href="#">Contatti</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Termini di Servizio</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ETF Italia. Tutti i diritti riservati.</p>
+                <p class="disclaimer">
+                    <small>Le informazioni fornite non costituiscono consigli di investimento. Investire comporta sempre dei rischi.</small>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/admin-integration.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize article page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadArticle();
+            loadRelatedArticles();
+        });
+        
+        // Load article from URL parameters
+        function loadArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            const slug = urlParams.get('slug');
+            
+            if (!articleId) {
+                showArticleNotFound();
+                return;
+            }
+            
+            // Try to load from sessionStorage first
+            const storedArticle = sessionStorage.getItem(`article_${articleId}`);
+            
+            if (storedArticle) {
+                const article = JSON.parse(storedArticle);
+                displayArticle(article);
+            } else {
+                // Try to load from admin data
+                if (window.adminIntegration) {
+                    const publishedArticles = window.adminIntegration.getPublishedArticles();
+                    const article = publishedArticles.find(a => {
+                        // Check by ID
+                        if (a.id && a.id.toString() === articleId) return true;
+                        
+                        // Check by hash code
+                        if (window.adminIntegration.hashCode(a.title).toString() === articleId) return true;
+                        
+                        // Check by slug (for direct URL access)
+                        const articleSlug = window.adminIntegration.createSlug(a.title);
+                        if (articleSlug === articleId || articleSlug === slug) return true;
+                        
+                        return false;
+                    });
+                    
+                    if (article) {
+                        displayArticle(article);
+                    } else {
+                        showArticleNotFound();
+                    }
+                } else {
+                    showArticleNotFound();
+                }
+            }
+        }
+        
+        // Display article content
+        function displayArticle(article) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            const slug = urlParams.get('slug');
+            const currentUrl = `https://etfitalia.com/article.html?id=${articleId}&slug=${slug}`;
+            
+            // Update page title and meta
+            document.title = `${article.title} | ETF Italia - Guida agli Investimenti`;
+            document.getElementById('articleDescription').content = article.excerpt || '';
+            
+            // Update canonical URL
+            document.getElementById('canonicalUrl').href = currentUrl;
+            
+            // Update Open Graph meta tags
+            document.getElementById('ogUrl').content = currentUrl;
+            document.getElementById('ogTitle').content = `${article.title} | ETF Italia`;
+            document.getElementById('ogDescription').content = article.excerpt || '';
+            
+            // Update Twitter meta tags
+            document.getElementById('twitterUrl').content = currentUrl;
+            document.getElementById('twitterTitle').content = `${article.title} | ETF Italia`;
+            document.getElementById('twitterDescription').content = article.excerpt || '';
+            
+            // Update keywords based on article category and tags
+            let keywords = 'ETF, investimenti, Borsa Italiana, finanza personale';
+            if (article.category) {
+                keywords += `, ${article.category}`;
+            }
+            if (article.tags && article.tags.length > 0) {
+                keywords += `, ${article.tags.join(', ')}`;
+            }
+            document.getElementById('articleKeywords').content = keywords;
+            
+            // Update breadcrumb
+            document.getElementById('breadcrumbTitle').textContent = article.title;
+            
+            // Update article header
+            const categoryEmojis = {
+                'analisi': '📊',
+                'guida': '📚',
+                'strategia': '🎯',
+                'news': '📰',
+                'tutorial': '🔧'
+            };
+            
+            const emoji = categoryEmojis[article.category] || '📄';
+            document.getElementById('articleCategory').textContent = `${emoji} ${article.category || 'Articolo'}`;
+            document.getElementById('articleDate').textContent = article.date || 'Data non disponibile';
+            document.getElementById('articleTitleMain').textContent = article.title;
+            document.getElementById('articleExcerpt').textContent = article.excerpt || '';
+            
+            // Update tags
+            const tagsContainer = document.getElementById('articleTags');
+            if (article.tags && article.tags.length > 0) {
+                tagsContainer.innerHTML = article.tags.map(tag => 
+                    `<span class="article-tag">${tag}</span>`
+                ).join('');
+            } else {
+                tagsContainer.style.display = 'none';
+            }
+            
+            // Update content
+            const contentContainer = document.getElementById('articleContent');
+            if (article.content) {
+                contentContainer.innerHTML = formatArticleContent(article.content);
+            } else {
+                contentContainer.innerHTML = `
+                    <p><strong>${article.excerpt}</strong></p>
+                    <p>Questo è un articolo di esempio. Il contenuto completo sarà disponibile quando l'articolo verrà pubblicato.</p>
+                `;
+            }
+        }
+        
+        // Format article content with basic markdown support
+        function formatArticleContent(content) {
+            return content
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+                .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+                .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/^(.)/gm, '<p>$1')
+                .replace(/(.*)$/gm, '$1</p>')
+                .replace(/<p><\/p>/g, '')
+                .replace(/<p>(<h[1-6]>.*<\/h[1-6]>)<\/p>/g, '$1');
+        }
+        
+        // Show article not found message
+        function showArticleNotFound() {
+            document.title = 'Articolo non trovato | ETF Italia - Guida agli Investimenti';
+            document.getElementById('articleTitleMain').textContent = 'Articolo non trovato';
+            document.getElementById('articleContent').innerHTML = `
+                <div class="article-not-found">
+                    <h2>😔 Articolo non trovato</h2>
+                    <p>L'articolo che stai cercando non esiste o è stato rimosso.</p>
+                    <div class="not-found-actions">
+                        <a href="blog.html" class="btn btn-primary">Vai al Blog</a>
+                        <a href="/" class="btn btn-secondary">Torna alla Home</a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Load related articles
+        function loadRelatedArticles() {
+            const relatedContainer = document.getElementById('relatedArticles');
+            
+            if (window.adminIntegration) {
+                const publishedArticles = window.adminIntegration.getPublishedArticles();
+                const relatedArticles = publishedArticles.slice(0, 3); // Show first 3 articles
+                
+                if (relatedArticles.length > 0) {
+                    relatedContainer.innerHTML = '';
+                    relatedArticles.forEach(article => {
+                        const articleCard = window.adminIntegration.createBlogCard(article);
+                        articleCard.classList.add('related-card');
+                        relatedContainer.appendChild(articleCard);
+                    });
+                } else {
+                    document.querySelector('.related-articles').style.display = 'none';
+                }
+            } else {
+                document.querySelector('.related-articles').style.display = 'none';
+            }
+        }
+        
+        // Share functions
+        function shareOnTwitter() {
+            const title = document.getElementById('articleTitleMain').textContent;
+            const url = window.location.href;
+            const text = `${title} - ETF Italia`;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+        
+        function shareOnLinkedIn() {
+            const url = window.location.href;
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+        }
+        
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                if (typeof showToast === 'function') {
+                    showToast('Link copiato negli appunti!', 'success');
+                } else {
+                    alert('Link copiato negli appunti!');
+                }
+            }).catch(() => {
+                if (typeof showToast === 'function') {
+                    showToast('Errore nel copiare il link', 'error');
+                } else {
+                    alert('Errore nel copiare il link');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

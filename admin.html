@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - GuadagnareConETF</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://etfitalia.com/admin.html">
+    
+    <title>Pannello Amministrazione - ETF Italia | Gestione Contenuti e Configurazioni</title>
+    <meta name="description" content="Pannello di amministrazione ETF Italia per la gestione di contenuti, broker, articoli del blog e configurazioni del sito. Accesso riservato agli amministratori.">
     <link rel="stylesheet" href="css/style.css">
     <style>
         .admin-login {
@@ -262,7 +268,18 @@
             <section id="blog" class="admin-section">
                 <div class="section-header">
                     <h2>📝 Gestione Blog</h2>
-                    <button class="btn btn-primary" onclick="addArticle()">Nuovo Articolo</button>
+                    <div class="blog-actions">
+                        <button class="btn btn-primary" onclick="addArticle()">Nuovo Articolo</button>
+                        <button class="btn btn-success" onclick="generateAIArticles()" id="generateAIBtn">
+                            🤖 Genera Articoli AI
+                        </button>
+                    </div>
+                </div>
+                <div id="aiGenerationStatus" class="ai-status" style="display: none;">
+                    <div class="status-message">
+                        <span id="aiStatusText">Generazione in corso...</span>
+                        <div class="loading-spinner"></div>
+                    </div>
                 </div>
                 <div id="blogManager">
                     <p>Gestione blog in caricamento...</p>
@@ -283,5 +300,6 @@
     <script src="js/admin-backup.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/blog-editor.js"></script>
+    <script src="js/admin-ai.js"></script>
 </body>
 </html>

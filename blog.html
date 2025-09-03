@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="blog ETF, guide investimenti, analisi ETF, strategie portafoglio, Borsa Italiana, finanza personale">
+    <meta name="author" content="ETF Italia">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://etfitalia.com/blog.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://etfitalia.com/blog.html">
+    <meta property="og:title" content="Blog ETF Italia | Guide, Analisi e Strategie di Investimento">
+    <meta property="og:description" content="Blog ETF Italia: guide complete agli investimenti, analisi dettagliate degli ETF quotati su Borsa Italiana, strategie di portafoglio e consigli per investitori.">
+    <meta property="og:image" content="https://etfitalia.com/images/blog-og-image.jpg">
+    <meta property="og:site_name" content="ETF Italia">
+    <meta property="og:locale" content="it_IT">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://etfitalia.com/blog.html">
+    <meta property="twitter:title" content="Blog ETF Italia | Guide, Analisi e Strategie di Investimento">
+    <meta property="twitter:description" content="Blog ETF Italia: guide complete agli investimenti, analisi dettagliate degli ETF quotati su Borsa Italiana, strategie di portafoglio.">
+    <meta property="twitter:site" content="@ETFItalia">
+    <meta property="twitter:creator" content="@ETFItalia">
+    
+    <title>Blog ETF Italia | Guide, Analisi e Strategie di Investimento</title>
+    <meta name="description" content="Blog ETF Italia: guide complete agli investimenti, analisi dettagliate degli ETF quotati su Borsa Italiana, strategie di portafoglio e consigli per investitori principianti ed esperti. Articoli aggiornati sui mercati finanziari.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/">📈 ETF Italia</a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="/#hero" class="nav-link">Home</a></li>
+                        <li><a href="/#etf-search" class="nav-link">Cerca ETF</a></li>
+                        <li><a href="/#comparator" class="nav-link">Comparatore</a></li>
+                        <li><a href="/#brokers" class="nav-link">Broker</a></li>
+                        <li><a href="/#blog" class="nav-link active">Blog</a></li>
+                        <li><a href="/#fire-calculator" class="nav-link">Calcolatore FIRE</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="window.location.href='admin.html'">Admin</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Blog Hero Section -->
+        <section class="blog-hero">
+            <div class="container">
+                <div class="blog-hero-content">
+                    <h1>📝 Blog ETF Italia</h1>
+                    <p class="blog-hero-description">
+                        Analisi approfondite, guide pratiche e strategie di investimento per massimizzare i tuoi rendimenti con gli ETF.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Content -->
+        <section class="blog-content">
+            <div class="container">
+                <div class="blog-layout">
+                    <!-- Blog Articles -->
+                    <div class="blog-main">
+                        <div class="blog-filters">
+                            <h3>Filtra per categoria:</h3>
+                            <div class="filter-buttons">
+                                <button class="filter-btn active" data-category="all">Tutti</button>
+                                <button class="filter-btn" data-category="analisi">Analisi</button>
+                                <button class="filter-btn" data-category="guida">Guide</button>
+                                <button class="filter-btn" data-category="mercati">Mercati</button>
+                                <button class="filter-btn" data-category="strategia">Strategie</button>
+                                <button class="filter-btn" data-category="news">News</button>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-grid" id="allBlogGrid">
+                            <!-- Articles will be loaded here -->
+                        </div>
+                        
+                        <div class="blog-pagination" id="blogPagination">
+                            <!-- Pagination will be added here if needed -->
+                        </div>
+                    </div>
+                    
+                    <!-- Blog Sidebar -->
+                    <aside class="blog-sidebar">
+                        <div class="sidebar-widget">
+                            <h3>📊 Categorie</h3>
+                            <ul class="category-list" id="categoryList">
+                                <!-- Categories will be loaded here -->
+                            </ul>
+                        </div>
+                        
+                        <div class="sidebar-widget">
+                            <h3>🔥 Articoli Popolari</h3>
+                            <div class="popular-articles" id="popularArticles">
+                                <!-- Popular articles will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-widget">
+                            <h3>🏷️ Tag</h3>
+                            <div class="tag-cloud" id="tagCloud">
+                                <!-- Tags will be loaded here -->
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ETF Italia</h3>
+                    <p>La piattaforma completa per investitori italiani interessati agli ETF quotati su Borsa Italiana.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">📱</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="YouTube">📺</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Strumenti</h4>
+                    <ul>
+                        <li><a href="/#etf-search">Cerca ETF</a></li>
+                        <li><a href="/#comparator">Comparatore</a></li>
+                        <li><a href="/#fire-calculator">Calcolatore FIRE</a></li>
+                        <li><a href="/#portfolio">Portfolio Tracker</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Risorse</h4>
+                    <ul>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/#brokers">Broker Consigliati</a></li>
+                        <li><a href="#">Guide ETF</a></li>
+                        <li><a href="#">Analisi Mercati</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Informazioni</h4>
+                    <ul>
+                        <li><a href="#">Chi Siamo</a></li>
+                        <li><a href="#">Contatti</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Termini di Servizio</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ETF Italia. Tutti i diritti riservati.</p>
+                <p class="disclaimer">
+                    <small>Le informazioni fornite non costituiscono consigli di investimento. Investire comporta sempre dei rischi.</small>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/admin-integration.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize blog page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize admin integration for loading articles
+            if (window.adminIntegration) {
+                window.adminIntegration.initializeBlogPage();
+            }
+            
+            // Setup filter functionality
+            setupBlogFilters();
+            
+            // Load all articles
+            loadAllBlogArticles();
+        });
+        
+        // Setup blog filters
+        function setupBlogFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active filter
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter articles
+                    const category = this.dataset.category;
+                    filterArticlesByCategory(category);
+                });
+            });
+        }
+        
+        // Filter articles by category
+        function filterArticlesByCategory(category) {
+            const articles = document.querySelectorAll('.blog-card');
+            
+            articles.forEach(article => {
+                if (category === 'all' || article.dataset.category === category) {
+                    article.style.display = 'block';
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+        }
+        
+        // Load all blog articles
+        function loadAllBlogArticles() {
+            const blogGrid = document.getElementById('allBlogGrid');
+            
+            // Load published articles from admin data
+            if (window.adminIntegration) {
+                const publishedArticles = window.adminIntegration.getPublishedArticles();
+                
+                if (publishedArticles.length > 0) {
+                    blogGrid.innerHTML = '';
+                    publishedArticles.forEach(article => {
+                    const articleCard = window.adminIntegration.createBlogCard(article);
+                    articleCard.dataset.category = article.category || 'analisi';
+                    blogGrid.appendChild(articleCard);
+                });
+                } else {
+                    // Load sample articles if no admin articles
+                    loadSampleBlogArticles(blogGrid);
+                }
+            } else {
+                // Load sample articles as fallback
+                loadSampleBlogArticles(blogGrid);
+            }
+            
+            // Update sidebar
+            updateBlogSidebar();
+        }
+        
+        // Load sample blog articles
+        function loadSampleBlogArticles(container) {
+            const sampleArticles = [
+                {
+                    title: 'Analisi Mercati: ETF Azionari in Crescita nel Q4 2024',
+                    excerpt: 'I mercati azionari europei mostrano segnali positivi con gli ETF che registrano performance superiori alle aspettative. Analizziamo i migliori ETF azionari per il prossimo trimestre.',
+                    date: '15 Gen 2024',
+                    category: 'analisi',
+                    tags: ['ETF', 'Mercati', 'Analisi']
+                },
+                {
+                    title: 'Guida Completa agli ETF Obbligazionari Italiani',
+                    excerpt: 'Tutto quello che devi sapere sugli ETF obbligazionari quotati su Borsa Italiana per diversificare il tuo portafoglio e ridurre il rischio.',
+                    date: '12 Gen 2024',
+                    category: 'guida',
+                    tags: ['ETF', 'Obbligazioni', 'Guida']
+                },
+                {
+                    title: 'Strategia FIRE: Come Raggiungere l\'Indipendenza Finanziaria',
+                    excerpt: 'Scopri come utilizzare gli ETF per costruire una strategia FIRE efficace e raggiungere l\'indipendenza finanziaria in Italia.',
+                    date: '10 Gen 2024',
+                    category: 'strategia',
+                    tags: ['FIRE', 'Strategia', 'Investimenti']
+                },
+                {
+                    title: 'I Migliori ETF Tecnologici per il 2024',
+                    excerpt: 'Analisi approfondita dei migliori ETF del settore tecnologico disponibili su Borsa Italiana, con focus su AI e innovazione.',
+                    date: '8 Gen 2024',
+                    category: 'analisi',
+                    tags: ['Tecnologia', 'ETF', 'AI']
+                },
+                {
+                    title: 'Come Costruire un Portafoglio ETF Diversificato',
+                    excerpt: 'Guida pratica per costruire un portafoglio ETF ben diversificato, bilanciando rischio e rendimento secondo i tuoi obiettivi.',
+                    date: '5 Gen 2024',
+                    category: 'guida',
+                    tags: ['Portafoglio', 'Diversificazione', 'ETF']
+                },
+                {
+                    title: 'ETF ESG: Investire in Modo Sostenibile',
+                    excerpt: 'Tutto sui fondi ESG quotati su Borsa Italiana: come investire in modo sostenibile senza rinunciare ai rendimenti.',
+                    date: '3 Gen 2024',
+                    category: 'news',
+                    tags: ['ESG', 'Sostenibilità', 'ETF']
+                }
+            ];
+            
+            container.innerHTML = '';
+            sampleArticles.forEach(article => {
+                const articleCard = createBlogCard(article);
+                articleCard.dataset.category = article.category;
+                container.appendChild(articleCard);
+            });
+        }
+        
+        // Use the createBlogCard function from admin-integration.js
+        // This ensures proper navigation to article.html with correct parameters
+        
+        // Update blog sidebar
+        function updateBlogSidebar() {
+            updateCategoryList();
+            updatePopularArticles();
+            updateTagCloud();
+        }
+        
+        // Update category list
+        function updateCategoryList() {
+            const categoryList = document.getElementById('categoryList');
+            const categories = [
+                { name: 'Analisi ETF', count: 15, slug: 'analisi' },
+                { name: 'Guide', count: 12, slug: 'guida' },
+                { name: 'Mercati', count: 8, slug: 'mercati' },
+                { name: 'Strategie', count: 6, slug: 'strategia' },
+                { name: 'News', count: 4, slug: 'news' }
+            ];
+            
+            categoryList.innerHTML = categories.map(cat => 
+                `<li><a href="#" data-category="${cat.slug}">${cat.name} (${cat.count})</a></li>`
+            ).join('');
+            
+            // Add click handlers
+            categoryList.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const category = link.dataset.category;
+                    
+                    // Update filter buttons
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.category === category);
+                    });
+                    
+                    // Filter articles
+                    filterArticlesByCategory(category);
+                });
+            });
+        }
+        
+        // Update popular articles
+        function updatePopularArticles() {
+            const popularContainer = document.getElementById('popularArticles');
+            const popularArticles = [
+                { title: 'Guida Completa agli ETF per Principianti', views: 1250 },
+                { title: 'I 10 Migliori ETF su Borsa Italiana', views: 980 },
+                { title: 'Strategia FIRE con ETF', views: 750 }
+            ];
+            
+            popularContainer.innerHTML = popularArticles.map(article => 
+                `<div class="popular-article">
+                    <h4>${article.title}</h4>
+                    <span class="views">👁️ ${article.views} visualizzazioni</span>
+                </div>`
+            ).join('');
+        }
+        
+        // Update tag cloud
+        function updateTagCloud() {
+            const tagCloud = document.getElementById('tagCloud');
+            const tags = [
+                'ETF', 'Investimenti', 'Borsa Italiana', 'FIRE', 'Diversificazione',
+                'Analisi', 'Mercati', 'Obbligazioni', 'Azioni', 'ESG', 'Tecnologia'
+            ];
+            
+            tagCloud.innerHTML = tags.map(tag => 
+                `<span class="tag-item">${tag}</span>`
+            ).join('');
+        }
+    </script>
+</body>
+</html>

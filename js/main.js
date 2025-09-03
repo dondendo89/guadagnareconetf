@@ -12,6 +12,12 @@ function initializeApp() {
     setupSmoothScrolling();
     setupAnimations();
     loadInitialData();
+    
+    // Initialize article routing if on article page
+    if (window.location.pathname.includes('article.html')) {
+        // Article page initialization is handled in article.html
+        return;
+    }
 }
 
 // Navigation Setup
@@ -299,8 +305,9 @@ function createBlogCard(post) {
     `;
     
     card.addEventListener('click', () => {
-        // Navigate to blog post
-        console.log('Navigate to blog post:', post.title);
+        // Navigate to article page
+        const articleId = post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        navigateToArticle(articleId);
     });
     
     return card;
@@ -432,8 +439,13 @@ function addToPortfolio(isin) {
 // Error Handling
 window.addEventListener('error', function(e) {
     console.error('JavaScript Error:', e.error);
-    showToast('Si è verificato un errore. Riprova più tardi.', 'error');
 });
+
+// Article Navigation
+function navigateToArticle(articleId) {
+    // Navigate to dedicated article page
+    window.location.href = `article.html?id=${articleId}`;
+}
 
 // Add CSS for toast animations
 const style = document.createElement('style');
