@@ -21,7 +21,7 @@ class handler(BaseHTTPRequestHandler):
             try:
                 # Get the host from the request
                 host = self.headers.get('Host', 'guadagnareconetf.vercel.app')
-                blog_data_url = f'https://{host}/js/blog-data.js'
+                blog_data_url = f'https://{host}/blog-data.js'
                 
                 with urllib.request.urlopen(blog_data_url) as response:
                     content = response.read().decode('utf-8')
