@@ -158,6 +158,17 @@ function getAIGeneratedArticles() {
     return blogArticles.filter(article => article.aiGenerated);
 }
 
+// Esporta per uso globale nel browser
+if (typeof window !== 'undefined') {
+    window.blogArticles = blogArticles;
+    window.getAllArticles = getAllArticles;
+    window.getArticleById = getArticleById;
+    window.getArticlesByCategory = getArticlesByCategory;
+    window.getFeaturedArticles = getFeaturedArticles;
+    window.getPublishedArticles = getPublishedArticles;
+    window.getAIGeneratedArticles = getAIGeneratedArticles;
+}
+
 // Esporta per uso in altri moduli
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
